@@ -1,0 +1,251 @@
+{
+  "id": "GachaToy",
+  "name": "25件玩具",
+  "fields": [
+    {
+      "key": "toyId",
+      "label": "ToyId",
+      "type": "string",
+      "required": true,
+      "description": "首次与重复的唯一判定键"
+    },
+    {
+      "key": "name",
+      "label": "名称",
+      "type": "string",
+      "required": true,
+      "description": "收藏、结果及Info共用"
+    },
+    {
+      "key": "qualityId",
+      "label": "品质",
+      "type": "string",
+      "required": true,
+      "description": "GREEN／BLUE／PURPLE／RED／GOLD"
+    },
+    {
+      "key": "collectionId",
+      "label": "收藏组",
+      "type": "string",
+      "required": true,
+      "description": "关联ProgressNodes的品质节点"
+    },
+    {
+      "key": "shapeKey",
+      "label": "SVG形状键",
+      "type": "string",
+      "required": true,
+      "description": "复用绘制系统中的不同物件轮廓"
+    },
+    {
+      "key": "sortOrder",
+      "label": "组内顺序",
+      "type": "number",
+      "required": true,
+      "description": "1—5"
+    }
+  ],
+  "rows": [
+    {
+      "toyId": "G01",
+      "name": "发条青蛙",
+      "qualityId": "GREEN",
+      "collectionId": "COL_GREEN",
+      "shapeKey": "frog",
+      "sortOrder": 1
+    },
+    {
+      "toyId": "G02",
+      "name": "叶片小车",
+      "qualityId": "GREEN",
+      "collectionId": "COL_GREEN",
+      "shapeKey": "leaf_car",
+      "sortOrder": 2
+    },
+    {
+      "toyId": "G03",
+      "name": "蘑菇陀螺",
+      "qualityId": "GREEN",
+      "collectionId": "COL_GREEN",
+      "shapeKey": "mushroom_top",
+      "sortOrder": 3
+    },
+    {
+      "toyId": "G04",
+      "name": "松果机器人",
+      "qualityId": "GREEN",
+      "collectionId": "COL_GREEN",
+      "shapeKey": "pine_robot",
+      "sortOrder": 4
+    },
+    {
+      "toyId": "G05",
+      "name": "苔藓小象",
+      "qualityId": "GREEN",
+      "collectionId": "COL_GREEN",
+      "shapeKey": "moss_elephant",
+      "sortOrder": 5
+    },
+    {
+      "toyId": "B01",
+      "name": "潜水小鸭",
+      "qualityId": "BLUE",
+      "collectionId": "COL_BLUE",
+      "shapeKey": "diver_duck",
+      "sortOrder": 1
+    },
+    {
+      "toyId": "B02",
+      "name": "海星飞船",
+      "qualityId": "BLUE",
+      "collectionId": "COL_BLUE",
+      "shapeKey": "star_ship",
+      "sortOrder": 2
+    },
+    {
+      "toyId": "B03",
+      "name": "泡泡水母",
+      "qualityId": "BLUE",
+      "collectionId": "COL_BLUE",
+      "shapeKey": "bubble_jelly",
+      "sortOrder": 3
+    },
+    {
+      "toyId": "B04",
+      "name": "灯塔鲸鱼",
+      "qualityId": "BLUE",
+      "collectionId": "COL_BLUE",
+      "shapeKey": "lighthouse_whale",
+      "sortOrder": 4
+    },
+    {
+      "toyId": "B05",
+      "name": "贝壳潜艇",
+      "qualityId": "BLUE",
+      "collectionId": "COL_BLUE",
+      "shapeKey": "shell_sub",
+      "sortOrder": 5
+    },
+    {
+      "toyId": "P01",
+      "name": "星轨魔猫",
+      "qualityId": "PURPLE",
+      "collectionId": "COL_PURPLE",
+      "shapeKey": "astral_cat",
+      "sortOrder": 1
+    },
+    {
+      "toyId": "P02",
+      "name": "月牙留声机",
+      "qualityId": "PURPLE",
+      "collectionId": "COL_PURPLE",
+      "shapeKey": "moon_gramophone",
+      "sortOrder": 2
+    },
+    {
+      "toyId": "P03",
+      "name": "水晶猫头鹰",
+      "qualityId": "PURPLE",
+      "collectionId": "COL_PURPLE",
+      "shapeKey": "crystal_owl",
+      "sortOrder": 3
+    },
+    {
+      "toyId": "P04",
+      "name": "银河小马",
+      "qualityId": "PURPLE",
+      "collectionId": "COL_PURPLE",
+      "shapeKey": "galaxy_pony",
+      "sortOrder": 4
+    },
+    {
+      "toyId": "P05",
+      "name": "彗星茶壶",
+      "qualityId": "PURPLE",
+      "collectionId": "COL_PURPLE",
+      "shapeKey": "comet_teapot",
+      "sortOrder": 5
+    },
+    {
+      "toyId": "R01",
+      "name": "火箭小熊",
+      "qualityId": "RED",
+      "collectionId": "COL_RED",
+      "shapeKey": "rocket_bear",
+      "sortOrder": 1
+    },
+    {
+      "toyId": "R02",
+      "name": "齿轮狮子",
+      "qualityId": "RED",
+      "collectionId": "COL_RED",
+      "shapeKey": "gear_lion",
+      "sortOrder": 2
+    },
+    {
+      "toyId": "R03",
+      "name": "灯笼狐狸",
+      "qualityId": "RED",
+      "collectionId": "COL_RED",
+      "shapeKey": "lantern_fox",
+      "sortOrder": 3
+    },
+    {
+      "toyId": "R04",
+      "name": "巡游火车",
+      "qualityId": "RED",
+      "collectionId": "COL_RED",
+      "shapeKey": "parade_train",
+      "sortOrder": 4
+    },
+    {
+      "toyId": "R05",
+      "name": "熔岩独角兽",
+      "qualityId": "RED",
+      "collectionId": "COL_RED",
+      "shapeKey": "lava_unicorn",
+      "sortOrder": 5
+    },
+    {
+      "toyId": "Y01",
+      "name": "皇冠龙蛋",
+      "qualityId": "GOLD",
+      "collectionId": "COL_GOLD",
+      "shapeKey": "crown_egg",
+      "sortOrder": 1
+    },
+    {
+      "toyId": "Y02",
+      "name": "日轮孔雀",
+      "qualityId": "GOLD",
+      "collectionId": "COL_GOLD",
+      "shapeKey": "sun_peacock",
+      "sortOrder": 2
+    },
+    {
+      "toyId": "Y03",
+      "name": "宝石城堡",
+      "qualityId": "GOLD",
+      "collectionId": "COL_GOLD",
+      "shapeKey": "gem_castle",
+      "sortOrder": 3
+    },
+    {
+      "toyId": "Y04",
+      "name": "金翼飞马",
+      "qualityId": "GOLD",
+      "collectionId": "COL_GOLD",
+      "shapeKey": "gold_pegasus",
+      "sortOrder": 4
+    },
+    {
+      "toyId": "Y05",
+      "name": "星冠凤凰",
+      "qualityId": "GOLD",
+      "collectionId": "COL_GOLD",
+      "shapeKey": "star_phoenix",
+      "sortOrder": 5
+    }
+  ],
+  "pacing": {}
+}

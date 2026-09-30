@@ -1,0 +1,103 @@
+{
+  "id": "SupplyRules",
+  "name": "外部供券模拟契约",
+  "fields": [
+    {
+      "key": "ruleId",
+      "label": "规则ID",
+      "type": "string",
+      "required": true,
+      "description": "供券事件关联键"
+    },
+    {
+      "key": "source",
+      "label": "模拟来源",
+      "type": "string",
+      "required": true,
+      "description": "ORDER_SETTLED／GENERATOR_OUTPUT"
+    },
+    {
+      "key": "scope",
+      "label": "适用范围",
+      "type": "string",
+      "required": true,
+      "description": "显示用模拟来源，不创建上游页面"
+    },
+    {
+      "key": "tier",
+      "label": "适用分层",
+      "type": "string",
+      "required": true,
+      "description": "对应PlayerLayers"
+    },
+    {
+      "key": "method",
+      "label": "发券方式",
+      "type": "string",
+      "required": true,
+      "description": "FIXED／HIT_PROBABILITY"
+    },
+    {
+      "key": "hitRate",
+      "label": "配置命中率",
+      "type": "number",
+      "required": true,
+      "description": "0—1；Debug显式模拟命中结果"
+    },
+    {
+      "key": "ticketsOnHit",
+      "label": "命中券数",
+      "type": "number",
+      "required": true,
+      "description": "成功且命中后发券"
+    },
+    {
+      "key": "dailyCap",
+      "label": "日上限",
+      "type": "number",
+      "required": true,
+      "description": "-1为不限"
+    },
+    {
+      "key": "periodCap",
+      "label": "期上限",
+      "type": "number",
+      "required": true,
+      "description": "-1为不限"
+    },
+    {
+      "key": "unit",
+      "label": "判定单位",
+      "type": "string",
+      "required": true,
+      "description": "每个唯一成功事件一次"
+    }
+  ],
+  "rows": [
+    {
+      "ruleId": "ORDER_01",
+      "source": "ORDER_SETTLED",
+      "scope": "模拟一次符合条件的订单成功提交及奖励结算",
+      "tier": "DEFAULT",
+      "method": "FIXED",
+      "hitRate": 1,
+      "ticketsOnHit": 5,
+      "dailyCap": -1,
+      "periodCap": -1,
+      "unit": "SUCCESS_EVENT"
+    },
+    {
+      "ruleId": "GEN_01",
+      "source": "GENERATOR_OUTPUT",
+      "scope": "模拟一次符合条件的生成器有效产出",
+      "tier": "DEFAULT",
+      "method": "HIT_PROBABILITY",
+      "hitRate": 0.5,
+      "ticketsOnHit": 2,
+      "dailyCap": -1,
+      "periodCap": -1,
+      "unit": "SUCCESSFUL_OUTPUT_EVENT"
+    }
+  ],
+  "pacing": {}
+}

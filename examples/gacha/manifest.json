@@ -1,0 +1,272 @@
+{
+  "candidate": false,
+  "activityId": "caac0514-3e12-4f86-8944-3ff2f4834812",
+  "productId": "mc",
+  "name": "扭蛋机活动",
+  "createdAt": "2026-09-30T06:22:33.399Z",
+  "configRevision": 1,
+  "files": {
+    "src/demo.html": {
+      "sha256": "e7c479dbc217bab90c4df69c359ff8a16112c5810564e9f45595c81f4ef251d3"
+    },
+    "src/styles-1.css": {
+      "sha256": "81bcb94c2f711dce88c43eea1d87c8e9371406d8afb16b8577b284b38e162cc3"
+    },
+    "src/styles-2.css": {
+      "sha256": "fae3e44dd33fa5d87cee8be704effda96749ebfa1f68c816a72816581fb91011"
+    },
+    "src/styles-3.css": {
+      "sha256": "f35c4179943ce11f856c034ff1a6e5a5ededbe9d67583bad0d9cd0fb28b1d12c"
+    },
+    "src/styles-4.css": {
+      "sha256": "e0117867cbc5a95a95035556b50eb5ce964140d4c083a02232728f269ffd07b8"
+    },
+    "src/script-1.js": {
+      "sha256": "7f91837d6572f61eaa6950ffa63ce50b19501e54a1b7233e48f7cd7c4e59a67a"
+    },
+    "index.html": {
+      "sha256": "940d493ac1ef2782352ce2450f7e5845fdb56a6a9183f64c3c525aa842cb2eb9"
+    },
+    "config/runtime.js": {
+      "sha256": "27ad77ada480bdfb7d5aa781d441fa2c85db125afea3c27eb5c4ffc5e58241c6"
+    },
+    "standalone.html": {
+      "sha256": "573c4f279cb92b958a6041a4d3d7f748e9e24c0db80516df4bf73bef7afe77b5"
+    },
+    "assets/74fc2b4f-1c84-4579-a59f-af4a78367eb0.png": {
+      "sha256": "405bd4093d633c5c87338ba1c1fd97dee72f3b08d5793d48906412c3b853c388"
+    },
+    "assets/83162074-4df6-405f-aabd-5218031a6892.png": {
+      "sha256": "51740b5d0bce05627df7f9c107f9a85abffbb2f3d80d857de6538cebb2e2a5f9"
+    },
+    "docs/features.md": {
+      "sha256": "43c057bdad45f92dd638e51c70dcf998ffe19278816afc97b1c9b38e86b814f7"
+    },
+    "docs/unity-handoff.md": {
+      "sha256": "f31eb2c501f6985657052ff163c991a43f88e02a6e014e8fade67ad911b5e339"
+    },
+    "docs/requirements.json": {
+      "sha256": "71ebe57273814fbff9031b5c06b12a6cc8d55c41e76af27d4f7b3829f639281c"
+    },
+    "docs/implementation.md": {
+      "sha256": "43c057bdad45f92dd638e51c70dcf998ffe19278816afc97b1c9b38e86b814f7"
+    },
+    "docs/planning.md": {
+      "sha256": "1135e0a4d8dfee76bca6e85ea729b9e97c5df23c96b87630bf877b2373a8c908"
+    },
+    "README.md": {
+      "sha256": "985aa8634956a1a5c9fe3fac1508e60c8079bc61f32b3cbef7cd8044a0e8ced5"
+    },
+    "docs/quality.md": {
+      "sha256": "cc3b9f96c809379270a8e48947cb7617ec72f862da70a3aea157162c200c1c7a"
+    },
+    "docs/configuration.md": {
+      "sha256": "1bcb3d73da7c4e57e2289d015e7de1fcdc93b3567c54353a071d91d1e88483b6"
+    },
+    "configuration.json": {
+      "sha256": "0383294a8f24e4d9e147bfe1e2cfdfad5c7bd1b3792b2898e3b4c4a5dfb9e4df"
+    },
+    "config/all-tables.xlsx": {
+      "sha256": "755db977d18df7b832977e81a14c6917d4a1a39b3ae5f6255a30f3b8b3ae53a5"
+    },
+    "config/ActivityConfig.csv": {
+      "sha256": "8688d212a43cd5f36778bf421e7e05ebe8cc7fe488de10b5081ad5eadeb0c497"
+    },
+    "config/ActivityConfig.json": {
+      "sha256": "d9e04ffeecccebb78d3751e6c6aaa0c346296e25855b9ab6bbe7d14816ff48d1"
+    },
+    "config/SupplyRules.csv": {
+      "sha256": "2fbe09cc8d76343a45b89c2d6e5a294b1327cfc0e32a5e428fda420db5b481ea"
+    },
+    "config/SupplyRules.json": {
+      "sha256": "eb1ba23584b9f99874b7ad3bf9086bf382b20828f2f9e625391a83cde1a4ec77"
+    },
+    "config/PlayerLayers.csv": {
+      "sha256": "fe0710989954f4f59be3c0aed8b6901a53bdccbcc348bbc7cce68fcc1e22dd2c"
+    },
+    "config/PlayerLayers.json": {
+      "sha256": "8f913d82b0bcaededdede3c6e1d900ccc198661f84ea49a69e4a397511f32594"
+    },
+    "config/DrawTiers.csv": {
+      "sha256": "47368b2dc4368edceaed668139d7be1363b68642515fbbc0b8bc83d018ad7363"
+    },
+    "config/DrawTiers.json": {
+      "sha256": "68301d630177ee13a101576340d1dc590c816c42a572b4e83218df1119d97327"
+    },
+    "config/GachaToy.csv": {
+      "sha256": "99cb6b4b7288f428ecfdaad1fa1e204e6176d541b872cd414913fc43085505a6"
+    },
+    "config/GachaToy.json": {
+      "sha256": "3816ba8c9acb1978f08389ab0c345f845136245bbb520eb59c95b2936f29af69"
+    },
+    "config/QualityConvert.csv": {
+      "sha256": "f8511c584c18c89015afc9c67a557c2979b6878db33fedb57bb85501c277c3ce"
+    },
+    "config/QualityConvert.json": {
+      "sha256": "2420b68c329f6b76fd7c4fb28d734fff9a325c15ff1fa8c2df51688907c085a8"
+    },
+    "config/RewardCatalog.csv": {
+      "sha256": "b11c7e50d982a6235d16ae2149e0e6917eb6ee4ddbee9ee171cb40c9730a8ca3"
+    },
+    "config/RewardCatalog.json": {
+      "sha256": "92a4cf645334eea849faa3c985071b17531ce26067cc28c7502cf207835e62cc"
+    },
+    "config/GachaSequence.csv": {
+      "sha256": "9dce8897e381b2bcc4a0ada8639a3883b7f185ac0ec73a4e414493bc24f70109"
+    },
+    "config/GachaSequence.json": {
+      "sha256": "a4eab247627db048b544deda1e0c8c3f3b9d16905415412d1746e6d05b366b0d"
+    },
+    "config/ProgressNodes.csv": {
+      "sha256": "8c19e981e9affd65240c90a519338cd48cb755320de1758e644c88f08a860e83"
+    },
+    "config/ProgressNodes.json": {
+      "sha256": "84cb4f31d69a6de10880a1e5e75135c0b9e819eb6cad5454fc51b4a37a09c919"
+    },
+    "config/GachaShop.csv": {
+      "sha256": "ec5df004401a0155dbb206bc03510066a0a9cc624a52f0bf53aac88086293678"
+    },
+    "config/GachaShop.json": {
+      "sha256": "35ad4ad70d8e27ddb4854bc885feed56d976e6d4ee731641182ad0c2b86ea421"
+    },
+    "config/UiCopy.csv": {
+      "sha256": "e091ab841b12e7dace1825f13fe5d20c32b0a1e86965e43d9338ddec7231833a"
+    },
+    "config/UiCopy.json": {
+      "sha256": "af47f7db05dfc47241014fea8bc3eb2d8984ae96fb7098a715ff7232a30f4edf"
+    },
+    "config/VisualTheme.csv": {
+      "sha256": "8db5ba6dad25fa88eb9e676701a85fe1f1e8a86a27279b7c36a2ca517288d194"
+    },
+    "config/VisualTheme.json": {
+      "sha256": "0ccbc0c828d680b647b7a9bdaa4fa7b8fb82f7a82ae6b3a19780e75dadf36e84"
+    },
+    "package.json": {
+      "sha256": "57420411cf33be15c5673f54bcc77f5af5faba4300849ad5e28487f0c9e32a83"
+    },
+    "tools/build-config.mjs": {
+      "sha256": "2c06128fa828b7724111c780376614d6b819997963fa3ce2eaee9eb4ef4316e6"
+    },
+    "tools/serve.mjs": {
+      "sha256": "23d537f0c41cc0967137b465022b19ca74ae5903ce4019b72166a263069cda7c"
+    },
+    "project/src/config.js": {
+      "sha256": "3646b784033ba6f038e711de96f78c45605fc9ce68faa6782a67a0a13f5e8fc3"
+    },
+    "project/src/persistence.js": {
+      "sha256": "bf63530e5f2cc09f059b00f617d64f74de81bf307a2cbd408e804fd5cd6dce3a"
+    },
+    "project/src/progress.js": {
+      "sha256": "31d47fcf531ddbaf9686b5750185018405115650fb7227bf3625014e210999f5"
+    },
+    "project/src/rewards.js": {
+      "sha256": "357336637a70b779b6db135411b51c5a51a8ffdbcb1a11c2b2e437fa979a22ac"
+    },
+    "project/src/supply.js": {
+      "sha256": "381f35ef4490941af11ab865374e7acd1f4591342d2aa1deca595b48ed727a76"
+    },
+    "project/src/draw.js": {
+      "sha256": "ac263625cb59d0601d3130e8d04fa8f546646b10cb70271a40d9b26baa047606"
+    },
+    "project/src/shop.js": {
+      "sha256": "4b99715d35f8bbda0342f6d7e62af587fc378f63ee31f974b2a32422c3a85f92"
+    },
+    "project/src/settlement.js": {
+      "sha256": "4b3d1e3a30e98d5039fc2d699f888249452abab47cd8ae15e36f7e28bbb1032e"
+    },
+    "project/src/state.js": {
+      "sha256": "2d3bb49c1beec811ca073cdf3b52173f0ce6ee58b35c593e345d535ddd408d38"
+    },
+    "project/src/art.js": {
+      "sha256": "f41656bb55e30072550e478d3c62af8fd503cf1db5aacad0a47161720619bfb1"
+    },
+    "project/src/views.js": {
+      "sha256": "00372365324c82252d48e9487565b7f03bdb440414a3893b10634cf9361cfd17"
+    },
+    "project/src/feedback.js": {
+      "sha256": "8d01be63ce4132c8715f9d06ea1147dfc05d3c774baf64ee1d91fd02a9a91732"
+    },
+    "project/src/input.js": {
+      "sha256": "4fd8a0c797178571e2d62752adfd0a7444b2df826a8128d483173501feec0a5e"
+    },
+    "project/src/styles.css": {
+      "sha256": "0fa6b828caeb167865e01352f0ead441b94d909b1e13f3b35b24e3efade94aab"
+    },
+    "project/src/main.js": {
+      "sha256": "63c48f8e04b31f28cea05b0ae8801cbce1a7a8daca2ac628d0da67c8126c1219"
+    },
+    "project/index.html": {
+      "sha256": "c262c78ee265b1f60a230b57f6e71f3483134ff7454ad44718c2ea1cf204f5ef"
+    },
+    "project/src/telemetry.js": {
+      "sha256": "559e9da573eaf3e23fe9ff42bef454828a57c8aad08d2db5138ef7acd04707c5"
+    },
+    "project/docs/unity-art-handoff.md": {
+      "sha256": "d12105dd9a105b72afdb9ab51b5ce22cd3bc8c7235dda023fc197de4e828258d"
+    },
+    "project/docs/test-revision-1.json": {
+      "sha256": "4f449b7b96e209c15b47f1006b932013878943a3a3336c2bdab4748ec6d7fb3e"
+    },
+    "project/docs/test-revision-2.json": {
+      "sha256": "950318ddd5163022591e51a96145e986827adb9f9af4afad553470e9cb741c94"
+    },
+    "project/src/defaults.js": {
+      "sha256": "3e8f68ec0c4e7b9dfa0957270fb8ce025bf6cad04167d9189720f0d2956f42b2"
+    },
+    "project/tests/exchange-guards.js": {
+      "sha256": "3b18cc3590e799a83f0c97ce481c7b0cfabd56824dade6feb14a24363a9677ad"
+    },
+    "project/tests/field-only-config.js": {
+      "sha256": "a021940e05df3d8e76ac4dacbd1df155658e62e6f0b34425ffc76458e1953c15"
+    },
+    "project/tests/claim-queue-recovery.js": {
+      "sha256": "10ac3fcebb738c396a4a25365ca3f796ca0c3a708a7909bd6edc1cc27cd76b5f"
+    },
+    "project/tests/config-edge-cases.js": {
+      "sha256": "981b9b2dce1aba93ed5f97c5f61a2f5adfc9e1d417ce0c62516b32ddaaf29820"
+    },
+    "project/tests/settlement-recovery.js": {
+      "sha256": "9dff5344e7039d50e5014187fd689525f56664999cdefd9cc7e4ba3810b33a1a"
+    },
+    "project-tests.json": {
+      "sha256": "51dd9a163ba8ada96b7bd77a8ea03d3e1d650421cf4ea748edba297ceede6347"
+    },
+    "project-files.json": {
+      "sha256": "9cd0017ca81b0f341b8761bce23f46d4b0bb1366dd15db078e40d0fb7cf8bc7b"
+    },
+    "tools/project-builder.mjs": {
+      "sha256": "f6c25e1edb598769bc406b96773232f31697647efba0e5f1182ca47dd2201ba3"
+    },
+    "tools/project-browser.mjs": {
+      "sha256": "ee9acaf00c2c6420d2eca658cfff1491dfe83f3b9ad6860e340c73839f7416a4"
+    },
+    "tools/build-project.mjs": {
+      "sha256": "0f532e384a4fe44b81dc62da7b74af9b0077d595e56c9fc48d0bf97d29e6402d"
+    },
+    "tools/test-project.mjs": {
+      "sha256": "1dae67b8e2aff12cc773c8f63561f9c1dd2219cb35b80013187b637cabb3be04"
+    }
+  },
+  "artifacts": {
+    "source": {
+      "updatedAt": "2026-09-29T08:04:34.612Z",
+      "sha256": "81cbf1ce69589bcdf7cfc195a310d85b8e1e1151cdd06d49d2d3bd59a62c9962"
+    },
+    "document": {
+      "updatedAt": "2026-09-29T08:07:13.145Z",
+      "sha256": "b1d5e3402cde8f8259a09571150d4df32a1d68cfe0c343636c9546c88e2051d4"
+    },
+    "demo": {
+      "updatedAt": "2026-09-30T03:56:31.204Z",
+      "sha256": "e7c479dbc217bab90c4df69c359ff8a16112c5810564e9f45595c81f4ef251d3"
+    },
+    "ue-demo": {
+      "updatedAt": "2026-09-30T03:42:36.552Z",
+      "sha256": "8e125bcdabe1fd81d65e09d07a6dfccddc1780120c0a3c9c5882e315258b2867"
+    },
+    "handoff": {
+      "updatedAt": "2026-09-30T03:43:47.643Z",
+      "sha256": "42346ee3229cffe1c54372ad0d8d0c4174d1dec080535593c0ed4a35d812523f"
+    }
+  }
+}

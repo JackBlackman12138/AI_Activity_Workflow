@@ -1,0 +1,75 @@
+{
+  "id": "GachaSequence",
+  "name": "完整有序奖励房间",
+  "fields": [
+    {
+      "key": "periodId",
+      "label": "活动期次",
+      "type": "string",
+      "required": true,
+      "description": "关联ActivityConfig"
+    },
+    {
+      "key": "layerId",
+      "label": "适用分层",
+      "type": "string",
+      "required": true,
+      "description": "关联PlayerLayers"
+    },
+    {
+      "key": "sequenceGroup",
+      "label": "序列组",
+      "type": "string",
+      "required": true,
+      "description": "本期持续保存"
+    },
+    {
+      "key": "roomId",
+      "label": "RoomId",
+      "type": "number",
+      "required": true,
+      "description": "按升序读取"
+    },
+    {
+      "key": "orderedRewardsJson",
+      "label": "有序奖励JSON",
+      "type": "string",
+      "required": true,
+      "description": "JSON字符串：20个奖励ID组成的数组；G/B/P/R/Y前缀为ToyId，其余关联RewardCatalog；每项单次数量由对应表读取"
+    },
+    {
+      "key": "endRule",
+      "label": "读完本房间",
+      "type": "string",
+      "required": true,
+      "description": "NEXT_ROOM或LOOP_THIS_ROOM"
+    }
+  ],
+  "rows": [
+    {
+      "periodId": "DEMO_20260929",
+      "layerId": "DEFAULT",
+      "sequenceGroup": "SEQ_A",
+      "roomId": 101,
+      "orderedRewardsJson": "[\"G01\",\"G01\",\"B01\",\"P01\",\"R01\",\"Y01\",\"G02\",\"B02\",\"P02\",\"R02\",\"Y02\",\"G03\",\"B03\",\"P03\",\"R03\",\"Y03\",\"G04\",\"B04\",\"P04\",\"G01\"]",
+      "endRule": "NEXT_ROOM"
+    },
+    {
+      "periodId": "DEMO_20260929",
+      "layerId": "DEFAULT",
+      "sequenceGroup": "SEQ_A",
+      "roomId": 102,
+      "orderedRewardsJson": "[\"G01\",\"COIN50\",\"R04\",\"Y04\",\"G05\",\"B05\",\"P05\",\"R05\",\"Y05\",\"Y01\",\"Y05\",\"R05\",\"P05\",\"B05\",\"G05\",\"ENERGY10\",\"BOARD1\",\"Y05\",\"R01\",\"COIN50\"]",
+      "endRule": "NEXT_ROOM"
+    },
+    {
+      "periodId": "DEMO_20260929",
+      "layerId": "DEFAULT",
+      "sequenceGroup": "SEQ_A",
+      "roomId": 103,
+      "orderedRewardsJson": "[\"G01\",\"B01\",\"P01\",\"R01\",\"Y01\",\"COIN50\",\"G05\",\"B05\",\"P05\",\"R05\",\"Y05\",\"ENERGY10\",\"G02\",\"B02\",\"P02\",\"R02\",\"Y02\",\"BOARD1\",\"R05\",\"Y05\"]",
+      "endRule": "LOOP_THIS_ROOM"
+    }
+  ],
+  "pacing": {}
+}

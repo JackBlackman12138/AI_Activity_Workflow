@@ -1,0 +1,3 @@
+﻿"ruleId","source","scope","tier","method","hitRate","ticketsOnHit","dailyCap","periodCap","unit"
+"ORDER_01","ORDER_SETTLED","模拟一次符合条件的订单成功提交及奖励结算","DEFAULT","FIXED","1","5","-1","-1","SUCCESS_EVENT"
+"GEN_01","GENERATOR_OUTPUT","模拟一次符合条件的生成器有效产出","DEFAULT","HIT_PROBABILITY","0.5","2","-1","-1","SUCCESSFUL_OUTPUT_EVENT"

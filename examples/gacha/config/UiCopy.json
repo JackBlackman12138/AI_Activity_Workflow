@@ -1,0 +1,157 @@
+{
+  "id": "UiCopy",
+  "name": "可配置规则文案、提示及引导",
+  "fields": [
+    {
+      "key": "copyId",
+      "label": "文案ID",
+      "type": "string",
+      "required": true,
+      "description": "界面引用键"
+    },
+    {
+      "key": "screen",
+      "label": "所属界面",
+      "type": "string",
+      "required": true,
+      "description": "screen ID或COMMON"
+    },
+    {
+      "key": "text",
+      "label": "显示文本",
+      "type": "string",
+      "required": true,
+      "description": "演示默认文案"
+    },
+    {
+      "key": "sortOrder",
+      "label": "阅读顺序",
+      "type": "number",
+      "required": true,
+      "description": "同界面从小到大"
+    }
+  ],
+  "rows": [
+    {
+      "copyId": "TITLE",
+      "screen": "machine",
+      "text": "七天扭蛋奇遇",
+      "sortOrder": 1
+    },
+    {
+      "copyId": "COVER",
+      "screen": "cover",
+      "text": "扭动旋钮，收集25件玩具！重复玩具会化作积分，集齐后解锁兑换商店。",
+      "sortOrder": 1
+    },
+    {
+      "copyId": "TICKET_LOW",
+      "screen": "machine",
+      "text": "扭蛋券不足，请完成订单或使用主线生成器获取",
+      "sortOrder": 2
+    },
+    {
+      "copyId": "SHOP_LOCK",
+      "screen": "shop",
+      "text": "需要集齐全部收藏解锁兑换商城",
+      "sortOrder": 1
+    },
+    {
+      "copyId": "POINT_LOW",
+      "screen": "shop",
+      "text": "积分不足，请继续扭蛋获取",
+      "sortOrder": 2
+    },
+    {
+      "copyId": "INFO_SCOPE",
+      "screen": "info",
+      "text": "以下为当前分层固定序列的投放占比，不是下一抽独立概率；首次玩具点亮收藏，重复玩具按品质转化积分。×3、×5、×10连续读取对应项数。显示百分比可能因四舍五入产生尾差。",
+      "sortOrder": 1
+    },
+    {
+      "copyId": "RULE_SUPPLY",
+      "screen": "rulesGuide",
+      "text": "符合条件的订单结算或生成器有效产出可获得扭蛋券。本Demo请主动点击Debug模拟供券；正式截止后停止外部供券。",
+      "sortOrder": 1
+    },
+    {
+      "copyId": "RULE_DRAW",
+      "screen": "rulesGuide",
+      "text": "选择倍率并消耗对应扭蛋券，按房间与序列顺序逐项抽取；批量倍率不放大奖励数量。",
+      "sortOrder": 2
+    },
+    {
+      "copyId": "RULE_COLLECT",
+      "screen": "rulesGuide",
+      "text": "收集绿、蓝、紫、红、金各5件玩具。各品质集齐后手动领奖；25件全收集后自动领取大奖并解锁商店。",
+      "sortOrder": 3
+    },
+    {
+      "copyId": "RULE_POINT",
+      "screen": "rulesGuide",
+      "text": "重复玩具分别转化1、2、3、5、10分。累计积分达标自动领奖；兑换仅消耗可用积分，不回退累计进度。",
+      "sortOrder": 4
+    },
+    {
+      "copyId": "RULE_END",
+      "screen": "rulesGuide",
+      "text": "全收藏后仍可抽取和兑换。到期停止外部供券；离开到期会话并完成补发后，剩余扭蛋券与积分清零，不继承下期。",
+      "sortOrder": 5
+    },
+    {
+      "copyId": "GUIDE_1",
+      "screen": "rulesGuide",
+      "text": "先看扭蛋券：订单结算和生成器有效产出是券的外部来源，使用Debug可分别模拟成功或失败。",
+      "sortOrder": 11
+    },
+    {
+      "copyId": "GUIDE_2",
+      "screen": "rulesGuide",
+      "text": "选择×1、×3、×5或×10；每档连续抽取对应数量的序列结果。",
+      "sortOrder": 12
+    },
+    {
+      "copyId": "GUIDE_3",
+      "screen": "rulesGuide",
+      "text": "新玩具点亮收藏；同一件再出现会转化为积分。",
+      "sortOrder": 13
+    },
+    {
+      "copyId": "GUIDE_4",
+      "screen": "rulesGuide",
+      "text": "查看五条品质收藏线，满5件后记得手动领取品质奖励。",
+      "sortOrder": 14
+    },
+    {
+      "copyId": "GUIDE_5",
+      "screen": "rulesGuide",
+      "text": "累计积分会点亮机台上方的阶段奖章；可用积分留待全收藏后兑换。",
+      "sortOrder": 15
+    },
+    {
+      "copyId": "SHOP_UNLOCK",
+      "screen": "shop",
+      "text": "25件玩具已集齐！积分兑换商店现已开放。",
+      "sortOrder": 3
+    },
+    {
+      "copyId": "END",
+      "screen": "ending",
+      "text": "本期扭蛋奇遇已结束。已达成而未到账的奖励将在结束说明后补发。",
+      "sortOrder": 1
+    },
+    {
+      "copyId": "TIME_UNKNOWN",
+      "screen": "unavailable",
+      "text": "服务器时间尚未确认，活动暂为只读；不会清理已有资产。",
+      "sortOrder": 1
+    },
+    {
+      "copyId": "SAVE_ERROR",
+      "screen": "unavailable",
+      "text": "活动存档暂不可用，抽取和兑换已暂停，避免重复扣费或发奖。",
+      "sortOrder": 2
+    }
+  ],
+  "pacing": {}
+}

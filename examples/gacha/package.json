@@ -1,0 +1,15 @@
+{
+  "name": "activity-demo-delivery",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:config": "node tools/build-config.mjs",
+    "build": "node tools/build-config.mjs && node tools/build-project.mjs",
+    "test": "npm run build && node tools/test-project.mjs",
+    "start": "node tools/build-config.mjs && node tools/serve.mjs"
+  },
+  "dependencies": {
+    "esbuild": "0.28.2",
+    "playwright": "1.63.0"
+  }
+}

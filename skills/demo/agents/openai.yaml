@@ -1,0 +1,6 @@
+interface:
+  display_name: "玩法与活动原型工坊"
+  short_description: "按机制与规模制作轻玩法、功能片段和活动的规则、UE及可玩Demo"
+  default_prompt: "使用 $build-merge-event-prototypes 理解我的玩法或功能目标，按系统归属、机制和复杂度选择制作深度，对齐流程、规则与反馈，并完成已授权的策划、UE或Demo及验证。"
+  icon_small: "./assets/icon.svg"
+  icon_large: "./assets/icon.svg"

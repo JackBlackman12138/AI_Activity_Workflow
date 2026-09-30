@@ -1,0 +1,195 @@
+{
+  "reason": "策划入口资格规则与功能审查 I01：资格、互斥或资源条件不满足时入口不显示，保留具体原因和 Debug；原测试点击不存在的入口并期待 toast 与此规则冲突。改为断言入口数量为0及可见原因，保留恢复资格后进入封面的原验收。",
+  "previous": {
+    "id": "GACHA_15",
+    "name": "互斥关系和资源状态分别说明入口不可用原因",
+    "requirements": [
+      "R01",
+      "R08"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='debug-open']"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='mutualExclusionClear']",
+        "value": "false"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-apply']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='entry'] .entry-caption",
+        "value": "存在互斥活动"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "expectText",
+        "selector": ".activity-toast",
+        "value": "存在互斥活动"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='debug-open']"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='mutualExclusionClear']",
+        "value": "true"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='resourcesReady']",
+        "value": "false"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-apply']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='entry'] .entry-caption",
+        "value": "活动资源尚未就绪"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='debug-open']"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='resourcesReady']",
+        "value": "true"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-apply']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      }
+    ]
+  },
+  "revised": {
+    "id": "GACHA_15",
+    "name": "互斥关系和资源状态分别说明入口不可用原因",
+    "requirements": [
+      "R01",
+      "R08"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='debug-open']"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='mutualExclusionClear']",
+        "value": "false"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-apply']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='entry'] .entry-caption",
+        "value": "存在互斥活动"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='entry'] [data-action='entry-open']",
+        "count": 0
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='entry'] .entry-unavailable",
+        "value": "存在互斥活动"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='debug-open']"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='mutualExclusionClear']",
+        "value": "true"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='resourcesReady']",
+        "value": "false"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-apply']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='entry'] .entry-caption",
+        "value": "活动资源尚未就绪"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='entry'] [data-action='entry-open']",
+        "count": 0
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='debug-open']"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='resourcesReady']",
+        "value": "true"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-apply']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      }
+    ]
+  }
+}

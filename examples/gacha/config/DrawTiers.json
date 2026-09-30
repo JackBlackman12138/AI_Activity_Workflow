@@ -1,0 +1,72 @@
+{
+  "id": "DrawTiers",
+  "name": "倍率与实际消耗",
+  "fields": [
+    {
+      "key": "tierId",
+      "label": "倍率ID",
+      "type": "string",
+      "required": true,
+      "description": "显示倍率"
+    },
+    {
+      "key": "singleCost",
+      "label": "单抽券数N",
+      "type": "number",
+      "required": true,
+      "description": "四行必须同值"
+    },
+    {
+      "key": "ticketCost",
+      "label": "本档券消耗",
+      "type": "number",
+      "required": true,
+      "description": "singleCost×reads"
+    },
+    {
+      "key": "reads",
+      "label": "序列读取数",
+      "type": "number",
+      "required": true,
+      "description": "每项独立结算"
+    },
+    {
+      "key": "sortOrder",
+      "label": "显示顺序",
+      "type": "number",
+      "required": true,
+      "description": "从左到右"
+    }
+  ],
+  "rows": [
+    {
+      "tierId": "X1",
+      "singleCost": 1,
+      "ticketCost": 1,
+      "reads": 1,
+      "sortOrder": 1
+    },
+    {
+      "tierId": "X3",
+      "singleCost": 1,
+      "ticketCost": 3,
+      "reads": 3,
+      "sortOrder": 2
+    },
+    {
+      "tierId": "X5",
+      "singleCost": 1,
+      "ticketCost": 5,
+      "reads": 5,
+      "sortOrder": 3
+    },
+    {
+      "tierId": "X10",
+      "singleCost": 1,
+      "ticketCost": 10,
+      "reads": 10,
+      "sortOrder": 4
+    }
+  ],
+  "pacing": {}
+}

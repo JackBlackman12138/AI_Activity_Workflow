@@ -1,0 +1,193 @@
+{
+  "id": "ProgressNodes",
+  "name": "可追踪主进度节点",
+  "fields": [
+    {
+      "key": "nodeId",
+      "label": "节点ID",
+      "type": "string",
+      "required": true,
+      "description": "主进度事件及领奖去重键"
+    },
+    {
+      "key": "nodeType",
+      "label": "节点类型",
+      "type": "string",
+      "required": true,
+      "description": "POINT／QUALITY／COMPLETE"
+    },
+    {
+      "key": "label",
+      "label": "节点文案",
+      "type": "string",
+      "required": true,
+      "description": "界面及事件日志共用"
+    },
+    {
+      "key": "target",
+      "label": "达成数值",
+      "type": "number",
+      "required": true,
+      "description": "累计积分或不同ToyId数"
+    },
+    {
+      "key": "collectionId",
+      "label": "收藏组ID",
+      "type": "string",
+      "required": true,
+      "description": "积分节点填ALL；品质节点与GachaToy关联"
+    },
+    {
+      "key": "rewardIdsJson",
+      "label": "奖励列表JSON",
+      "type": "string",
+      "required": true,
+      "description": "JSON字符串：RewardCatalog奖励ID数组；同一节点可含多项奖励"
+    },
+    {
+      "key": "claimMode",
+      "label": "领取方式",
+      "type": "string",
+      "required": true,
+      "description": "AUTO／MANUAL"
+    },
+    {
+      "key": "sortOrder",
+      "label": "展示及结算顺序",
+      "type": "number",
+      "required": true,
+      "description": "积分节点按门槛升序"
+    },
+    {
+      "key": "eventName",
+      "label": "进度事件",
+      "type": "string",
+      "required": true,
+      "description": "按平台契约上报的语义事件名"
+    }
+  ],
+  "rows": [
+    {
+      "nodeId": "PT01",
+      "nodeType": "POINT",
+      "label": "累计1分",
+      "target": 1,
+      "collectionId": "ALL",
+      "rewardIdsJson": "[\"COIN50\"]",
+      "claimMode": "AUTO",
+      "sortOrder": 1,
+      "eventName": "point_stage_awarded"
+    },
+    {
+      "nodeId": "PT02",
+      "nodeType": "POINT",
+      "label": "累计5分",
+      "target": 5,
+      "collectionId": "ALL",
+      "rewardIdsJson": "[\"ENERGY10\"]",
+      "claimMode": "AUTO",
+      "sortOrder": 2,
+      "eventName": "point_stage_awarded"
+    },
+    {
+      "nodeId": "PT03",
+      "nodeType": "POINT",
+      "label": "累计15分",
+      "target": 15,
+      "collectionId": "ALL",
+      "rewardIdsJson": "[\"BOARD1\"]",
+      "claimMode": "AUTO",
+      "sortOrder": 3,
+      "eventName": "point_stage_awarded"
+    },
+    {
+      "nodeId": "PT04",
+      "nodeType": "POINT",
+      "label": "累计30分",
+      "target": 30,
+      "collectionId": "ALL",
+      "rewardIdsJson": "[\"COIN100\"]",
+      "claimMode": "AUTO",
+      "sortOrder": 4,
+      "eventName": "point_stage_awarded"
+    },
+    {
+      "nodeId": "PT05",
+      "nodeType": "POINT",
+      "label": "累计55分",
+      "target": 55,
+      "collectionId": "ALL",
+      "rewardIdsJson": "[\"ENERGY20\",\"BOARD1\"]",
+      "claimMode": "AUTO",
+      "sortOrder": 5,
+      "eventName": "point_stage_awarded"
+    },
+    {
+      "nodeId": "COL_GREEN",
+      "nodeType": "QUALITY",
+      "label": "绿色玩具5/5",
+      "target": 5,
+      "collectionId": "COL_GREEN",
+      "rewardIdsJson": "[\"COIN100\"]",
+      "claimMode": "MANUAL",
+      "sortOrder": 6,
+      "eventName": "quality_reward_claimed"
+    },
+    {
+      "nodeId": "COL_BLUE",
+      "nodeType": "QUALITY",
+      "label": "蓝色玩具5/5",
+      "target": 5,
+      "collectionId": "COL_BLUE",
+      "rewardIdsJson": "[\"ENERGY20\"]",
+      "claimMode": "MANUAL",
+      "sortOrder": 7,
+      "eventName": "quality_reward_claimed"
+    },
+    {
+      "nodeId": "COL_PURPLE",
+      "nodeType": "QUALITY",
+      "label": "紫色玩具5/5",
+      "target": 5,
+      "collectionId": "COL_PURPLE",
+      "rewardIdsJson": "[\"BOARD1\"]",
+      "claimMode": "MANUAL",
+      "sortOrder": 8,
+      "eventName": "quality_reward_claimed"
+    },
+    {
+      "nodeId": "COL_RED",
+      "nodeType": "QUALITY",
+      "label": "红色玩具5/5",
+      "target": 5,
+      "collectionId": "COL_RED",
+      "rewardIdsJson": "[\"COIN100\",\"BOARD1\"]",
+      "claimMode": "MANUAL",
+      "sortOrder": 9,
+      "eventName": "quality_reward_claimed"
+    },
+    {
+      "nodeId": "COL_GOLD",
+      "nodeType": "QUALITY",
+      "label": "金色玩具5/5",
+      "target": 5,
+      "collectionId": "COL_GOLD",
+      "rewardIdsJson": "[\"ENERGY20\",\"BOARD1\"]",
+      "claimMode": "MANUAL",
+      "sortOrder": 10,
+      "eventName": "quality_reward_claimed"
+    },
+    {
+      "nodeId": "COL_ALL",
+      "nodeType": "COMPLETE",
+      "label": "全部玩具25/25",
+      "target": 25,
+      "collectionId": "ALL",
+      "rewardIdsJson": "[\"COIN300\",\"ENERGY40\",\"BOARD2\"]",
+      "claimMode": "AUTO",
+      "sortOrder": 11,
+      "eventName": "collection_completed"
+    }
+  ],
+  "pacing": {}
+}

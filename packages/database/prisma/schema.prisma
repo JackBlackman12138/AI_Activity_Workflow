@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime   @default(now())
+  activities   Activity[]
+  auditLogs    AuditLog[]
+}
+
+model Activity {
+  id          String       @id @default(cuid())
+  name        String
+  type        ActivityType
+  status      ActivityStatus @default(DRAFT)
+  description String       @default("")
+  ownerId     String
+  owner       User         @relation(fields: [ownerId], references: [id])
+  jobs        GenerationJob[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  @@index([ownerId, updatedAt])
+}
+
+model GenerationJob {
+  id         String    @id @default(cuid())
+  activityId String
+  activity   Activity  @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  kind       String
+  state      JobState  @default(QUEUED)
+  payload    Json
+  result     Json?
+  attempts   Int       @default(0)
+  error      String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  @@index([state, createdAt])
+}
+
+model ModelSetting {
+  id             String   @id @default(cuid())
+  provider       String
+  model          String
+  baseUrl        String?
+  encryptedKey   String?
+  keyFingerprint String?
+  enabled        Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  actor      User?    @relation(fields: [actorId], references: [id])
+  action     String
+  resource   String
+  resourceId String?
+  metadata   Json?
+  createdAt  DateTime @default(now())
+  @@index([actorId, createdAt])
+}
+
+enum ActivityType { RACE INDEPENDENT_MERGE GIFT_PACK TASK_CHAIN N_VS_N }
+enum ActivityStatus { DRAFT GENERATING READY FAILED }
+enum JobState { QUEUED RUNNING COMPLETED FAILED }

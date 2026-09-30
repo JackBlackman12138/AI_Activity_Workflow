@@ -1,0 +1,130 @@
+{
+  "id": "RewardCatalog",
+  "name": "非玩具奖励及发放承接",
+  "fields": [
+    {
+      "key": "rewardId",
+      "label": "奖励ID",
+      "type": "string",
+      "required": true,
+      "description": "序列、进度及商品引用"
+    },
+    {
+      "key": "name",
+      "label": "显示名称",
+      "type": "string",
+      "required": true,
+      "description": "结果、Info及领奖共用"
+    },
+    {
+      "key": "rewardType",
+      "label": "奖励类型",
+      "type": "string",
+      "required": true,
+      "description": "COIN／MAIN_ENERGY／BOARD_ITEM"
+    },
+    {
+      "key": "quantity",
+      "label": "单次数量",
+      "type": "number",
+      "required": true,
+      "description": "每次引用该奖励的实际数量"
+    },
+    {
+      "key": "delivery",
+      "label": "承接方式",
+      "type": "string",
+      "required": true,
+      "description": "MOCK_CREDIT／MOCK_PENDING；仅记账"
+    },
+    {
+      "key": "iconKey",
+      "label": "SVG图标键",
+      "type": "string",
+      "required": true,
+      "description": "共用绘制系统"
+    },
+    {
+      "key": "note",
+      "label": "用途",
+      "type": "string",
+      "required": true,
+      "description": "便于核对奖励来源"
+    }
+  ],
+  "rows": [
+    {
+      "rewardId": "COIN50",
+      "name": "金币",
+      "rewardType": "COIN",
+      "quantity": 50,
+      "delivery": "MOCK_CREDIT",
+      "iconKey": "coin_stack",
+      "note": "扭蛋序列"
+    },
+    {
+      "rewardId": "COIN100",
+      "name": "金币",
+      "rewardType": "COIN",
+      "quantity": 100,
+      "delivery": "MOCK_CREDIT",
+      "iconKey": "coin_stack",
+      "note": "品质及商品"
+    },
+    {
+      "rewardId": "COIN300",
+      "name": "金币",
+      "rewardType": "COIN",
+      "quantity": 300,
+      "delivery": "MOCK_CREDIT",
+      "iconKey": "coin_chest",
+      "note": "全收藏大奖"
+    },
+    {
+      "rewardId": "ENERGY10",
+      "name": "主线体力",
+      "rewardType": "MAIN_ENERGY",
+      "quantity": 10,
+      "delivery": "MOCK_CREDIT",
+      "iconKey": "energy_bolt",
+      "note": "扭蛋序列及阶段"
+    },
+    {
+      "rewardId": "ENERGY20",
+      "name": "主线体力",
+      "rewardType": "MAIN_ENERGY",
+      "quantity": 20,
+      "delivery": "MOCK_CREDIT",
+      "iconKey": "energy_bolt",
+      "note": "品质及商品"
+    },
+    {
+      "rewardId": "ENERGY40",
+      "name": "主线体力",
+      "rewardType": "MAIN_ENERGY",
+      "quantity": 40,
+      "delivery": "MOCK_CREDIT",
+      "iconKey": "energy_flask",
+      "note": "全收藏大奖"
+    },
+    {
+      "rewardId": "BOARD1",
+      "name": "星纹道具箱",
+      "rewardType": "BOARD_ITEM",
+      "quantity": 1,
+      "delivery": "MOCK_PENDING",
+      "iconKey": "star_crate",
+      "note": "仅记录模拟待领奖"
+    },
+    {
+      "rewardId": "BOARD2",
+      "name": "星纹道具箱",
+      "rewardType": "BOARD_ITEM",
+      "quantity": 2,
+      "delivery": "MOCK_PENDING",
+      "iconKey": "star_crate",
+      "note": "仅记录模拟待领奖"
+    }
+  ],
+  "pacing": {}
+}

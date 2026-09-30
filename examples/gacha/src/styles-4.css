@@ -1,0 +1,12 @@
+
+      .machine-art .gm-wheel,.machine-art .gm-capsules{transform-box:fill-box;transform-origin:center}
+      .machine-art--active{transform-origin:50% 80%;animation:gm-shake var(--motion-duration,.85s) ease-in-out 1}
+      .machine-art--active .gm-wheel{animation:gm-turn var(--motion-duration,.85s) ease-in-out 1}
+      .machine-art--active .gm-capsules{animation:gm-roll var(--motion-duration,.85s) ease-in-out 1}
+      .machine-art--active .gm-dispensed{animation:gm-dispense var(--motion-duration,.85s) ease-out 1}
+      @keyframes gm-shake{0%,100%{transform:rotate(0)}25%{transform:rotate(-1.3deg)}48%{transform:rotate(1.3deg)}70%{transform:rotate(-.6deg)}}
+      @keyframes gm-dispense{0%,53%{opacity:0;transform:translateY(-13px) scale(.72)}65%{opacity:1}88%{opacity:1;transform:translateY(18px) scale(1)}100%{opacity:0;transform:translateY(22px) scale(1)}}
+      @keyframes gm-turn{40%{transform:rotate(65deg)}100%{transform:rotate(100deg)}}
+      @keyframes gm-roll{30%{transform:translate(3px,-5px) rotate(3deg)}65%{transform:translate(-4px,2px) rotate(-3deg)}}
+      @media(prefers-reduced-motion:reduce){.machine-art--active,.machine-art--active .gm-wheel,.machine-art--active .gm-capsules,.machine-art--active .gm-dispensed{animation:none}}
+    

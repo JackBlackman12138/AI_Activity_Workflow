@@ -1,0 +1,1912 @@
+{
+  "requirements": [
+    {
+      "id": "R01",
+      "source": "8.1、10.1、14",
+      "description": "活动仅覆盖本期七天。达到7级、完成第6波订单且时间、资格、互斥关系、资源状态和开关允许时显示活动入口。首次进入展示一次开启封面；同一期仅初始化一次，保存分层、序列和读取位置。软关不影响已开启的本期；硬关时，活动内玩家可停留至主动离开。",
+      "acceptance": "用固定可达的Debug入口分别调整等级、订单波次、资格、时间和开关，观察入口出现或消失及不可用原因；进入、关闭、重进后，封面不重复且进度不重置。",
+      "tableIds": [
+        "ActivityConfig",
+        "PlayerLayers",
+        "UiCopy"
+      ]
+    },
+    {
+      "id": "R02",
+      "source": "8.2、10.1、12、13.2—13.3",
+      "description": "外部供券只通过玩家主动点击Debug操作模拟。分别提供「模拟订单结算成功／失败」和「模拟生成器有效产出命中／未命中／产出失败」；显示模拟来源、配置数量和操作结果。成功事件按配置发券并以事件ID去重；失败、未命中、过期或不合资格不发券。不制作订单、棋盘、生成器或其产出循环。",
+      "acceptance": "点击各Debug操作，核对券余额与事件记录；以同一事件ID重放成功事件不重复发券；正式截止后点击成功模拟也不发券，并明确显示拒绝原因。",
+      "tableIds": [
+        "ActivityConfig",
+        "SupplyRules",
+        "UiCopy"
+      ]
+    },
+    {
+      "id": "R03",
+      "source": "8.3—8.4、13.4—13.5",
+      "description": "主界面提供倒计时、券余额、累计与可用积分、五个阶段节点、扭蛋机、常驻Info、四档倍率、抽取、收藏、商店、说明及关闭入口。一次抽取扣除N×倍率张券，依次读取相同数量的序列项；跨房间继续读取，末房间按配置循环。余额不足保留倍率，失败不扣券、不推进序列。",
+      "acceptance": "分别选择×1、×3、×5、×10抽取，核对消耗、结果数和房间游标；在券不足时点击，看到策划指定提示且游标不变；连续点击仅产生一个已确认批次。",
+      "tableIds": [
+        "ActivityConfig",
+        "DrawTiers",
+        "GachaSequence",
+        "PlayerLayers",
+        "UiCopy"
+      ]
+    },
+    {
+      "id": "R04",
+      "source": "8.4、8.6—8.8",
+      "description": "按结果顺序处理25件玩具：首次点亮收藏，同批后续相同ToyId按重复处理；五种品质重复分别增加1、2、3、5、10点，同时增加累计及可用积分。直接主游戏奖励记录模拟到账；棋盘承接类奖励仅记录模拟待领奖清单，不创建主棋盘。抽取结果之后依门槛处理自动阶段奖励，最后处理自动全收藏大奖。",
+      "acceptance": "抽到同批重复玩具时核对首次／重复状态及积分；跨越多个阶段节点时按升序出现领奖反馈；查看奖励账本，确认外发奖励有来源、数量和承接方式，重进不重复到账。",
+      "tableIds": [
+        "GachaToy",
+        "QualityConvert",
+        "RewardCatalog",
+        "ProgressNodes",
+        "GachaSequence"
+      ]
+    },
+    {
+      "id": "R05",
+      "source": "8.5、13.11",
+      "description": "Info展示当前分层及序列统计范围的固定序列「投放占比」，不称为下一抽独立概率。逐件列出25件玩具，并按奖励及数量组合列出其他结果；显示品质重复积分、倍率含义和统计口径。展示值从实际生效序列计算，不维护可能失配的第二套数值。",
+      "acceptance": "首次抽取前打开Info，能滚动查看25件玩具和全部非玩具组合；逐项计数与当前序列配置一致、占比合计100%；切换Debug分层后重新进入，看到对应口径。",
+      "tableIds": [
+        "GachaSequence",
+        "GachaToy",
+        "QualityConvert",
+        "RewardCatalog",
+        "PlayerLayers",
+        "UiCopy"
+      ]
+    },
+    {
+      "id": "R06",
+      "source": "8.6、8.10",
+      "description": "收藏页显示五条各含5件玩具的品质收藏线及25件总进度；未获得为锁定轮廓，新获得显示NEW。各品质满5件后分别手动点击奖励并经领奖弹板确认；全收藏大奖自动发放，不依赖品质奖励领取状态。",
+      "acceptance": "逐步点亮玩具，确认组进度及NEW状态；在5/5时进入收藏页手动领取，重复点击不重复到账；达到25/25后查看自动大奖及商店解锁。",
+      "tableIds": [
+        "GachaToy",
+        "ProgressNodes",
+        "RewardCatalog",
+        "UiCopy"
+      ]
+    },
+    {
+      "id": "R07",
+      "source": "8.7—8.9",
+      "description": "五个累计积分阶段节点达标自动领奖；兑换只扣可用积分，不降低累计积分。商店与收藏入口并列，未全收藏可查看但不能兑换；解锁后按商品价格、次数和确认弹窗兑换，全收藏后仍能继续抽取。",
+      "acceptance": "全收藏前尝试兑换看到锁定原因；解锁后取消确认不扣分，确认后仅可用积分下降、次数增加且奖励到账；积分不足和售罄分别显示正确状态。",
+      "tableIds": [
+        "ProgressNodes",
+        "GachaShop",
+        "RewardCatalog",
+        "UiCopy"
+      ]
+    },
+    {
+      "id": "R08",
+      "source": "8.1、8.3、9.1、11",
+      "description": "提供一次性开启封面、可关闭的新手引导、规则说明和商店解锁提示。引导解释Debug模拟的订单／生成器供券来源，但不要求游玩主线；引导中断不回滚已完成操作。",
+      "acceptance": "首次进入按顺序查看封面及引导；中途关闭并重进，活动进度保留；说明页能找到供券、倍率、收藏、积分、商店及截止规则。",
+      "tableIds": [
+        "ActivityConfig",
+        "UiCopy"
+      ]
+    },
+    {
+      "id": "R09",
+      "source": "9.2、10、12、14",
+      "description": "正式截止立即停止Debug外部供券。到期时仍在活动内可继续消耗已有券和积分，二级页返回不算离开；主动离开或模拟重登后进入一次性结束结算。已达成未到账奖励补发，未领取的已达成品质奖励进入补发列表；结束弹窗先于补发弹窗。本期剩余券及积分清零，外发奖励账本保留。时间未确认时不执行不可逆操作或清理。",
+      "acceptance": "在活动内将Debug时间调至截止后，验证抽取、领奖、兑换可继续而供券停止；关闭扭蛋机后看到结束及补发，重进不可继续；模拟时间不可确认时不能抽取、兑换或结算。",
+      "tableIds": [
+        "ActivityConfig",
+        "ProgressNodes",
+        "UiCopy"
+      ]
+    },
+    {
+      "id": "R10",
+      "source": "4、8.4、8.9—8.10、12",
+      "description": "状态、规则、输入、渲染和反馈分区。为供券事件、抽取批次、阶段／收藏奖励及兑换事务保存唯一ID和已确认结果；先原子确认业务变化，再播放表现。弹窗队列同一时刻只展示一个；切页、中断、重复点击和恢复不得二次扣费、读序列或发奖。",
+      "acceptance": "在抽取及兑换反馈期间重复点击、关闭弹层并模拟重进；核对每笔事务的消耗、序列位置、积分、领取状态与奖励账本仅变化一次；存档不可用时进入只读错误状态。",
+      "tableIds": [
+        "ActivityConfig",
+        "GachaSequence",
+        "ProgressNodes",
+        "GachaShop"
+      ]
+    },
+    {
+      "id": "R11",
+      "source": "6—10、13",
+      "description": "按平台契约上报本期初始化、Debug供券成功／拒绝、抽取确认、首次收藏、阶段达成、品质领奖、全收藏、兑换确认、正式截止和结束结算等主进度事件。离线预览记录本地事件日志，不依赖网络。",
+      "acceptance": "完成一轮抽取、收藏、领奖、兑换和结算后，在Debug事件日志查看事件ID、期次、进度节点、结果和去重状态；不得出现任何主线玩法页面。",
+      "tableIds": [
+        "ActivityConfig",
+        "ProgressNodes",
+        "UiCopy"
+      ]
+    },
+    {
+      "id": "R12",
+      "source": "交付与质量约束、8.3—8.10",
+      "description": "交付模块化离线源工程及平台配置接口适配。以390×844竖屏为基准适配窄矮窗口、触控目标至少44px、弹层内容内部滚动；支持减少动态效果。审查需列出具体代码／样式依据、发现的问题和修正建议；未实际运行浏览器不得宣称视觉或交互已验收。",
+      "acceptance": "静态审查模块边界、配置读取和幂等路径；检查每个入口与结束路径的测试记录。浏览器尚未运行时将视觉和实机交互状态标为「待运行验证」，不以缺少主线棋盘判失败。",
+      "tableIds": [
+        "VisualTheme",
+        "UiCopy"
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "id": "entry",
+      "name": "活动入口与外部场景占位",
+      "states": [
+        "资格不足及具体原因",
+        "开放且显示倒计时",
+        "优先显示可单抽次数",
+        "不能单抽时显示待领品质奖励数",
+        "均为0时不显示数字",
+        "到期或关闭后入口移除",
+        "始终可达的Debug入口；不呈现主线玩法"
+      ]
+    },
+    {
+      "id": "cover",
+      "name": "一次性开启封面",
+      "states": [
+        "本期首次排队展示",
+        "开始进入扭蛋机",
+        "重进不重复",
+        "可关闭并返回外部场景占位"
+      ]
+    },
+    {
+      "id": "machine",
+      "name": "扭蛋机主界面",
+      "states": [
+        "初始余额和五节点进度",
+        "×1／×3／×5／×10选中",
+        "券不足仍保留倍率",
+        "抽取确认中禁重复操作",
+        "抽取后更新收藏与积分",
+        "全收藏解锁商店",
+        "到期但仍处于本次活动会话",
+        "时间未确认只读",
+        "关闭并返回"
+      ]
+    },
+    {
+      "id": "drawResult",
+      "name": "单抽与批量结果弹层",
+      "states": [
+        "一次机器出蛋反馈",
+        "单抽1项",
+        "批量完整结果列表",
+        "首次玩具NEW",
+        "重复玩具压暗并标积分",
+        "主游戏奖励模拟到账／待领奖记录",
+        "中断后恢复已确认结果"
+      ]
+    },
+    {
+      "id": "collection",
+      "name": "玩具收藏",
+      "states": [
+        "五组各5个锁定玩具及总计0/25",
+        "点亮与NEW",
+        "单组5/5待领奖红点",
+        "各品质独立已领取",
+        "25/25全收藏大奖已自动发放",
+        "返回扭蛋机"
+      ]
+    },
+    {
+      "id": "claim",
+      "name": "通用领奖弹板与自动奖励队列",
+      "states": [
+        "品质奖励待手动确认",
+        "品质奖励已领取",
+        "多积分节点依门槛展示",
+        "全收藏大奖在节点之后展示",
+        "重复请求不再次发奖"
+      ]
+    },
+    {
+      "id": "shop",
+      "name": "积分兑换商店",
+      "states": [
+        "未解锁可浏览并展示锁定原因",
+        "解锁首次进入清除新功能红点",
+        "可兑换",
+        "积分不足",
+        "有限次商品售罄",
+        "不限次商品",
+        "返回扭蛋机"
+      ]
+    },
+    {
+      "id": "exchangeConfirm",
+      "name": "兑换确认弹窗",
+      "states": [
+        "展示奖励、价格及剩余次数",
+        "取消无变化",
+        "确认处理中禁重复点击",
+        "确认成功及模拟到账",
+        "复验失败不扣分"
+      ]
+    },
+    {
+      "id": "info",
+      "name": "奖励投放占比Info",
+      "states": [
+        "抽取前可打开",
+        "当前分层与固定序列统计口径",
+        "25件玩具逐项列表",
+        "其他奖励按数量组合列出",
+        "内部滚动与固定关闭按钮",
+        "关闭返回原倍率状态"
+      ]
+    },
+    {
+      "id": "rulesGuide",
+      "name": "活动规则与新手引导",
+      "states": [
+        "首次引导",
+        "引导中断后重进",
+        "完整规则滚动阅读",
+        "全收藏商店解锁提示"
+      ]
+    },
+    {
+      "id": "debug",
+      "name": "活动Debug抽屉",
+      "states": [
+        "固定入口可达",
+        "订单成功／失败模拟",
+        "生成器命中／未命中／产出失败模拟",
+        "供给数量及拒绝原因",
+        "调整资格、分层、时间、时间可信度和软硬开关",
+        "重复事件ID测试",
+        "事件日志、奖励账本、存档不可用及重新试玩"
+      ]
+    },
+    {
+      "id": "ending",
+      "name": "活动结束弹窗",
+      "states": [
+        "展示收藏完成数和结束说明",
+        "关闭或好的均结束本次会话",
+        "结算期内再次登录仅展示已记录结果",
+        "结算期外不再出现"
+      ]
+    },
+    {
+      "id": "makeup",
+      "name": "结束补发弹窗",
+      "states": [
+        "结束弹窗之后展示",
+        "列出已达成未到账奖励",
+        "手动领取合并补发",
+        "无待补发时跳过",
+        "重复进入不重复到账"
+      ]
+    },
+    {
+      "id": "unavailable",
+      "name": "不可用与恢复状态",
+      "states": [
+        "资格不满足",
+        "时间或服务器状态未确认",
+        "存档不可用只读",
+        "活动已结束",
+        "硬关后活动外不可进入"
+      ]
+    }
+  ],
+  "assumptions": [
+    "A01｜ActivityConfig：演示期次DEMO_20260929，开始时间为2026-09-29T03:00:00+08:00，截止为七天后的2026-10-06T03:00:00+08:00；用于离线可调的模拟服务器时间，不以设备时间直接结算。结算展示期2天、03:00日切、7级和第6波采用策划已知值。",
+    "A02｜ActivityConfig、DrawTiers：初始券3张、单抽N=1张为未定数值的演示假设。初始券确保不依赖外部玩法即可体验首抽；后续券仍须主动点击Debug供给，不能自动产生。",
+    "A03｜SupplyRules：演示订单成功每次发5张；生成器有效产出的配置命中率50%、命中发2张，Debug提供显式命中／未命中成功事件以稳定覆盖两种契约；失败为0张。不限日／期上限，两来源不共用上限。没有自动挂机掉落。",
+    "A04｜PlayerLayers、GachaSequence：演示只有DEFAULT一个适用分层与SEQ_A一组固定序列，不引入随机选组。房间101、102各20项，房间103有20项且到末尾只循环房间103；前两房间包含全部25件玩具，早期第2项即重复。此循环是策划未定的演示后续读取规则。",
+    "A05｜GachaToy：25个ToyId、中文玩具名称及SVG形状键为演示命名；五品质各5件、重复积分1／2／3／5／10是策划已知值。玩具奖励单次数量均为1。",
+    "A06｜RewardCatalog、ProgressNodes：金币、主线体力和待领奖道具的演示数量，以及五组品质奖励、大奖和阶段门槛／奖励均为演示假设；阶段门槛依次1、5、15、30、55，以保证全收藏前就能取得早期阶段奖励。外发奖励只记录模拟到账或模拟待领奖，不提供主线资源消费页。",
+    "A07｜GachaShop：三件演示商品价格3／10／25点，兑换限制分别为不限次／3次／1次；单次奖励数量取RewardCatalog配置。正价格、-1表示不限次及0不用于配置遵循策划。",
+    "A08｜UiCopy：首次引导采用五步说明，不赠送引导券；所有提示文案、步骤和解锁说明可配置。关闭引导不会代替真实抽取。",
+    "A09｜Info：百分比按当前分层SEQ_A的全部60个配置项逐项组合计数并保留两位小数，尾项吸收纯展示用舍入误差；这是固定序列的全范围投放占比，不预测下一抽。房间103循环后的长期占比另以房间103的20项统计并明确标识。",
+    "A10｜VisualTheme：主题色、尺寸和动效时长为缺少正式美术参数时的演示假设；参考图仅约束横向积分轨道的构图，不采纳其中门槛。已有用户数据优先，默认演示数据仅在不存在对应配置或存档时补齐，不覆盖已有行。",
+    "A11｜实现与测试：离线模拟服务器状态由Debug手动调整；演示重新试玩会建立新的本地测试期次实例并清除该实例的活动存档，不改写平台已有用户数据。不能把Debug「重新试玩」用作领奖或完成活动的替代操作。"
+  ],
+  "visualDirection": "referenceInterpretation：流程图只规定供券、顺序抽取及三类结果通路，不作为页面美术。积分参考图提供「机台上方横向轨道、节点奖章、当前数值与终点奖励」的层级参考；图中的1.5K、10.5K、100K及等级文案不采用。；theme：游乐园夜场的精致实体扭蛋柜：深蓝紫背景、奶油白说明面、珊瑚红机身、青蓝玻璃反光、暖金属包边；绿蓝紫红金品质拥有一致的专属环光。避免后台表格风格。；composition：390×844竖屏：顶部安全区为返回、七天倒计时和券余额；其下横向积分奖章轨道及独立可用积分徽牌；中央占主要高度的圆顶透明蛋仓、可见分层扭蛋、金属旋钮、弧形出蛋口及前景光影；底部固定倍率拨片与醒目抽取按钮，收藏、商店、Info、说明置于可达的侧边或底部辅助区。Debug入口固定于外部场景占位及机台页面，不被机台或弹层遮没。；drawing：无素材时用可复用内联SVG/CSS绘制蛋仓椭圆玻璃边缘、玻璃高光、厚度可见的机壳、螺丝与铆钉、旋钮刻度、前后两层彩色胶囊及独立玩具剪影。25件玩具使用五套品质轮廓体系及25个可辨认的小物件剪影变体；锁定状态保留形状轮廓，不能用纯文字卡片、Emoji或相同色块充当玩具。；tokens：颜色、字体、尺寸、圆角、描边、阴影和运动参数由VisualTheme表读取。标题24—28px、关键数字20—24px、正文14—16px、辅助文案至少12px；模块间距8／12／16／24px；触控热区至少44×44px。弹层使用暖白搪瓷面、18px圆角、双层阴影与顶部装饰，内容独立滚动，关闭和主按钮固定可达。；feedback：按压产生短促下沉与高光变化；确认后机身轻晃、罩内扭蛋滚动、旋钮旋转、出蛋口吐蛋，再展开结果。批量仅播放一次机台动画。NEW有柔和扫光，重复结果降明度并显示积分粒子，节点按升序点亮；所有奖励动效仅反映已确认状态。prefers-reduced-motion时使用静态状态切换，不改变业务时序。；responsive：窄屏保持资源栏、机台、主要操作区三级优先；较矮窗口缩短蛋仓与装饰留白，不裁掉抽取按钮。Info、收藏、商店及结果列表在弹层内部滚动；地图并非本活动机制，不绘制或依赖拖动地图。",
+  "configuration": {
+    "fields": [
+      {
+        "key": "nodeId",
+        "label": "节点ID",
+        "type": "string",
+        "required": true,
+        "description": "主进度事件及领奖去重键"
+      },
+      {
+        "key": "nodeType",
+        "label": "节点类型",
+        "type": "string",
+        "required": true,
+        "description": "POINT／QUALITY／COMPLETE"
+      },
+      {
+        "key": "label",
+        "label": "节点文案",
+        "type": "string",
+        "required": true,
+        "description": "界面及事件日志共用"
+      },
+      {
+        "key": "target",
+        "label": "达成数值",
+        "type": "number",
+        "required": true,
+        "description": "累计积分或不同ToyId数"
+      },
+      {
+        "key": "collectionId",
+        "label": "收藏组ID",
+        "type": "string",
+        "required": true,
+        "description": "积分节点填ALL；品质节点与GachaToy关联"
+      },
+      {
+        "key": "rewardIdsJson",
+        "label": "奖励列表JSON",
+        "type": "string",
+        "required": true,
+        "description": "JSON字符串：RewardCatalog奖励ID数组；同一节点可含多项奖励"
+      },
+      {
+        "key": "claimMode",
+        "label": "领取方式",
+        "type": "string",
+        "required": true,
+        "description": "AUTO／MANUAL"
+      },
+      {
+        "key": "sortOrder",
+        "label": "展示及结算顺序",
+        "type": "number",
+        "required": true,
+        "description": "积分节点按门槛升序"
+      },
+      {
+        "key": "eventName",
+        "label": "进度事件",
+        "type": "string",
+        "required": true,
+        "description": "按平台契约上报的语义事件名"
+      }
+    ],
+    "rows": [
+      {
+        "nodeId": "PT01",
+        "nodeType": "POINT",
+        "label": "累计1分",
+        "target": 1,
+        "collectionId": "ALL",
+        "rewardIdsJson": "[\"COIN50\"]",
+        "claimMode": "AUTO",
+        "sortOrder": 1,
+        "eventName": "point_stage_awarded"
+      },
+      {
+        "nodeId": "PT02",
+        "nodeType": "POINT",
+        "label": "累计5分",
+        "target": 5,
+        "collectionId": "ALL",
+        "rewardIdsJson": "[\"ENERGY10\"]",
+        "claimMode": "AUTO",
+        "sortOrder": 2,
+        "eventName": "point_stage_awarded"
+      },
+      {
+        "nodeId": "PT03",
+        "nodeType": "POINT",
+        "label": "累计15分",
+        "target": 15,
+        "collectionId": "ALL",
+        "rewardIdsJson": "[\"BOARD1\"]",
+        "claimMode": "AUTO",
+        "sortOrder": 3,
+        "eventName": "point_stage_awarded"
+      },
+      {
+        "nodeId": "PT04",
+        "nodeType": "POINT",
+        "label": "累计30分",
+        "target": 30,
+        "collectionId": "ALL",
+        "rewardIdsJson": "[\"COIN100\"]",
+        "claimMode": "AUTO",
+        "sortOrder": 4,
+        "eventName": "point_stage_awarded"
+      },
+      {
+        "nodeId": "PT05",
+        "nodeType": "POINT",
+        "label": "累计55分",
+        "target": 55,
+        "collectionId": "ALL",
+        "rewardIdsJson": "[\"ENERGY20\",\"BOARD1\"]",
+        "claimMode": "AUTO",
+        "sortOrder": 5,
+        "eventName": "point_stage_awarded"
+      },
+      {
+        "nodeId": "COL_GREEN",
+        "nodeType": "QUALITY",
+        "label": "绿色玩具5/5",
+        "target": 5,
+        "collectionId": "COL_GREEN",
+        "rewardIdsJson": "[\"COIN100\"]",
+        "claimMode": "MANUAL",
+        "sortOrder": 6,
+        "eventName": "quality_reward_claimed"
+      },
+      {
+        "nodeId": "COL_BLUE",
+        "nodeType": "QUALITY",
+        "label": "蓝色玩具5/5",
+        "target": 5,
+        "collectionId": "COL_BLUE",
+        "rewardIdsJson": "[\"ENERGY20\"]",
+        "claimMode": "MANUAL",
+        "sortOrder": 7,
+        "eventName": "quality_reward_claimed"
+      },
+      {
+        "nodeId": "COL_PURPLE",
+        "nodeType": "QUALITY",
+        "label": "紫色玩具5/5",
+        "target": 5,
+        "collectionId": "COL_PURPLE",
+        "rewardIdsJson": "[\"BOARD1\"]",
+        "claimMode": "MANUAL",
+        "sortOrder": 8,
+        "eventName": "quality_reward_claimed"
+      },
+      {
+        "nodeId": "COL_RED",
+        "nodeType": "QUALITY",
+        "label": "红色玩具5/5",
+        "target": 5,
+        "collectionId": "COL_RED",
+        "rewardIdsJson": "[\"COIN100\",\"BOARD1\"]",
+        "claimMode": "MANUAL",
+        "sortOrder": 9,
+        "eventName": "quality_reward_claimed"
+      },
+      {
+        "nodeId": "COL_GOLD",
+        "nodeType": "QUALITY",
+        "label": "金色玩具5/5",
+        "target": 5,
+        "collectionId": "COL_GOLD",
+        "rewardIdsJson": "[\"ENERGY20\",\"BOARD1\"]",
+        "claimMode": "MANUAL",
+        "sortOrder": 10,
+        "eventName": "quality_reward_claimed"
+      },
+      {
+        "nodeId": "COL_ALL",
+        "nodeType": "COMPLETE",
+        "label": "全部玩具25/25",
+        "target": 25,
+        "collectionId": "ALL",
+        "rewardIdsJson": "[\"COIN300\",\"ENERGY40\",\"BOARD2\"]",
+        "claimMode": "AUTO",
+        "sortOrder": 11,
+        "eventName": "collection_completed"
+      }
+    ],
+    "pacing": {},
+    "revision": 1,
+    "updatedAt": "2026-09-30T03:47:37.014Z",
+    "tables": [
+      {
+        "id": "ActivityConfig",
+        "name": "活动期次与全局规则",
+        "fields": [
+          {
+            "key": "periodId",
+            "label": "期次",
+            "type": "string",
+            "required": true,
+            "description": "全部配置与事件的关联键"
+          },
+          {
+            "key": "startAt",
+            "label": "开始时间",
+            "type": "string",
+            "required": true,
+            "description": "ISO时间，由模拟服务器时钟解释"
+          },
+          {
+            "key": "endAt",
+            "label": "正式截止",
+            "type": "string",
+            "required": true,
+            "description": "停止外部供券的ISO时间"
+          },
+          {
+            "key": "dayCutHour",
+            "label": "活动日切小时",
+            "type": "number",
+            "required": true,
+            "description": "已知值3；不重置资产"
+          },
+          {
+            "key": "minLevel",
+            "label": "最低等级",
+            "type": "number",
+            "required": true,
+            "description": "已知值7"
+          },
+          {
+            "key": "requiredWave",
+            "label": "前置订单波次",
+            "type": "number",
+            "required": true,
+            "description": "已知值6；仅Debug模拟资格"
+          },
+          {
+            "key": "initialTickets",
+            "label": "初始券",
+            "type": "number",
+            "required": true,
+            "description": "首次初始化一次"
+          },
+          {
+            "key": "settlementDays",
+            "label": "结算展示天数",
+            "type": "number",
+            "required": true,
+            "description": "已知值2"
+          },
+          {
+            "key": "switchState",
+            "label": "开关",
+            "type": "string",
+            "required": true,
+            "description": "OPEN／SOFT_OFF／HARD_OFF；Debug可调整"
+          },
+          {
+            "key": "timeTrusted",
+            "label": "时间可信",
+            "type": "boolean",
+            "required": true,
+            "description": "否时只读、不结算"
+          },
+          {
+            "key": "guideGiftTickets",
+            "label": "引导赠券",
+            "type": "number",
+            "required": true,
+            "description": "演示设0"
+          }
+        ],
+        "rows": [
+          {
+            "periodId": "DEMO_20260929",
+            "startAt": "2026-09-29T03:00:00+08:00",
+            "endAt": "2026-10-06T03:00:00+08:00",
+            "dayCutHour": 3,
+            "minLevel": 7,
+            "requiredWave": 6,
+            "initialTickets": 3,
+            "settlementDays": 2,
+            "switchState": "OPEN",
+            "timeTrusted": true,
+            "guideGiftTickets": 0
+          }
+        ],
+        "pacing": {}
+      },
+      {
+        "id": "SupplyRules",
+        "name": "外部供券模拟契约",
+        "fields": [
+          {
+            "key": "ruleId",
+            "label": "规则ID",
+            "type": "string",
+            "required": true,
+            "description": "供券事件关联键"
+          },
+          {
+            "key": "source",
+            "label": "模拟来源",
+            "type": "string",
+            "required": true,
+            "description": "ORDER_SETTLED／GENERATOR_OUTPUT"
+          },
+          {
+            "key": "scope",
+            "label": "适用范围",
+            "type": "string",
+            "required": true,
+            "description": "显示用模拟来源，不创建上游页面"
+          },
+          {
+            "key": "tier",
+            "label": "适用分层",
+            "type": "string",
+            "required": true,
+            "description": "对应PlayerLayers"
+          },
+          {
+            "key": "method",
+            "label": "发券方式",
+            "type": "string",
+            "required": true,
+            "description": "FIXED／HIT_PROBABILITY"
+          },
+          {
+            "key": "hitRate",
+            "label": "配置命中率",
+            "type": "number",
+            "required": true,
+            "description": "0—1；Debug显式模拟命中结果"
+          },
+          {
+            "key": "ticketsOnHit",
+            "label": "命中券数",
+            "type": "number",
+            "required": true,
+            "description": "成功且命中后发券"
+          },
+          {
+            "key": "dailyCap",
+            "label": "日上限",
+            "type": "number",
+            "required": true,
+            "description": "-1为不限"
+          },
+          {
+            "key": "periodCap",
+            "label": "期上限",
+            "type": "number",
+            "required": true,
+            "description": "-1为不限"
+          },
+          {
+            "key": "unit",
+            "label": "判定单位",
+            "type": "string",
+            "required": true,
+            "description": "每个唯一成功事件一次"
+          }
+        ],
+        "rows": [
+          {
+            "ruleId": "ORDER_01",
+            "source": "ORDER_SETTLED",
+            "scope": "模拟一次符合条件的订单成功提交及奖励结算",
+            "tier": "DEFAULT",
+            "method": "FIXED",
+            "hitRate": 1,
+            "ticketsOnHit": 5,
+            "dailyCap": -1,
+            "periodCap": -1,
+            "unit": "SUCCESS_EVENT"
+          },
+          {
+            "ruleId": "GEN_01",
+            "source": "GENERATOR_OUTPUT",
+            "scope": "模拟一次符合条件的生成器有效产出",
+            "tier": "DEFAULT",
+            "method": "HIT_PROBABILITY",
+            "hitRate": 0.5,
+            "ticketsOnHit": 2,
+            "dailyCap": -1,
+            "periodCap": -1,
+            "unit": "SUCCESSFUL_OUTPUT_EVENT"
+          }
+        ],
+        "pacing": {}
+      },
+      {
+        "id": "PlayerLayers",
+        "name": "演示玩家分层与序列选择",
+        "fields": [
+          {
+            "key": "layerId",
+            "label": "分层ID",
+            "type": "string",
+            "required": true,
+            "description": "本期首次初始化后持续保存"
+          },
+          {
+            "key": "sequenceGroup",
+            "label": "选中序列组",
+            "type": "string",
+            "required": true,
+            "description": "指向GachaSequence"
+          },
+          {
+            "key": "selection",
+            "label": "选取方式",
+            "type": "string",
+            "required": true,
+            "description": "FIXED表示无随机选组"
+          },
+          {
+            "key": "initialRoomId",
+            "label": "初始房间",
+            "type": "number",
+            "required": true,
+            "description": "首次初始化游标"
+          },
+          {
+            "key": "initialIndex",
+            "label": "初始位置",
+            "type": "number",
+            "required": true,
+            "description": "从1开始的序列位置"
+          }
+        ],
+        "rows": [
+          {
+            "layerId": "DEFAULT",
+            "sequenceGroup": "SEQ_A",
+            "selection": "FIXED",
+            "initialRoomId": 101,
+            "initialIndex": 1
+          }
+        ],
+        "pacing": {}
+      },
+      {
+        "id": "DrawTiers",
+        "name": "倍率与实际消耗",
+        "fields": [
+          {
+            "key": "tierId",
+            "label": "倍率ID",
+            "type": "string",
+            "required": true,
+            "description": "显示倍率"
+          },
+          {
+            "key": "singleCost",
+            "label": "单抽券数N",
+            "type": "number",
+            "required": true,
+            "description": "四行必须同值"
+          },
+          {
+            "key": "ticketCost",
+            "label": "本档券消耗",
+            "type": "number",
+            "required": true,
+            "description": "singleCost×reads"
+          },
+          {
+            "key": "reads",
+            "label": "序列读取数",
+            "type": "number",
+            "required": true,
+            "description": "每项独立结算"
+          },
+          {
+            "key": "sortOrder",
+            "label": "显示顺序",
+            "type": "number",
+            "required": true,
+            "description": "从左到右"
+          }
+        ],
+        "rows": [
+          {
+            "tierId": "X1",
+            "singleCost": 1,
+            "ticketCost": 1,
+            "reads": 1,
+            "sortOrder": 1
+          },
+          {
+            "tierId": "X3",
+            "singleCost": 1,
+            "ticketCost": 3,
+            "reads": 3,
+            "sortOrder": 2
+          },
+          {
+            "tierId": "X5",
+            "singleCost": 1,
+            "ticketCost": 5,
+            "reads": 5,
+            "sortOrder": 3
+          },
+          {
+            "tierId": "X10",
+            "singleCost": 1,
+            "ticketCost": 10,
+            "reads": 10,
+            "sortOrder": 4
+          }
+        ],
+        "pacing": {}
+      },
+      {
+        "id": "GachaToy",
+        "name": "25件玩具",
+        "fields": [
+          {
+            "key": "toyId",
+            "label": "ToyId",
+            "type": "string",
+            "required": true,
+            "description": "首次与重复的唯一判定键"
+          },
+          {
+            "key": "name",
+            "label": "名称",
+            "type": "string",
+            "required": true,
+            "description": "收藏、结果及Info共用"
+          },
+          {
+            "key": "qualityId",
+            "label": "品质",
+            "type": "string",
+            "required": true,
+            "description": "GREEN／BLUE／PURPLE／RED／GOLD"
+          },
+          {
+            "key": "collectionId",
+            "label": "收藏组",
+            "type": "string",
+            "required": true,
+            "description": "关联ProgressNodes的品质节点"
+          },
+          {
+            "key": "shapeKey",
+            "label": "SVG形状键",
+            "type": "string",
+            "required": true,
+            "description": "复用绘制系统中的不同物件轮廓"
+          },
+          {
+            "key": "sortOrder",
+            "label": "组内顺序",
+            "type": "number",
+            "required": true,
+            "description": "1—5"
+          }
+        ],
+        "rows": [
+          {
+            "toyId": "G01",
+            "name": "发条青蛙",
+            "qualityId": "GREEN",
+            "collectionId": "COL_GREEN",
+            "shapeKey": "frog",
+            "sortOrder": 1
+          },
+          {
+            "toyId": "G02",
+            "name": "叶片小车",
+            "qualityId": "GREEN",
+            "collectionId": "COL_GREEN",
+            "shapeKey": "leaf_car",
+            "sortOrder": 2
+          },
+          {
+            "toyId": "G03",
+            "name": "蘑菇陀螺",
+            "qualityId": "GREEN",
+            "collectionId": "COL_GREEN",
+            "shapeKey": "mushroom_top",
+            "sortOrder": 3
+          },
+          {
+            "toyId": "G04",
+            "name": "松果机器人",
+            "qualityId": "GREEN",
+            "collectionId": "COL_GREEN",
+            "shapeKey": "pine_robot",
+            "sortOrder": 4
+          },
+          {
+            "toyId": "G05",
+            "name": "苔藓小象",
+            "qualityId": "GREEN",
+            "collectionId": "COL_GREEN",
+            "shapeKey": "moss_elephant",
+            "sortOrder": 5
+          },
+          {
+            "toyId": "B01",
+            "name": "潜水小鸭",
+            "qualityId": "BLUE",
+            "collectionId": "COL_BLUE",
+            "shapeKey": "diver_duck",
+            "sortOrder": 1
+          },
+          {
+            "toyId": "B02",
+            "name": "海星飞船",
+            "qualityId": "BLUE",
+            "collectionId": "COL_BLUE",
+            "shapeKey": "star_ship",
+            "sortOrder": 2
+          },
+          {
+            "toyId": "B03",
+            "name": "泡泡水母",
+            "qualityId": "BLUE",
+            "collectionId": "COL_BLUE",
+            "shapeKey": "bubble_jelly",
+            "sortOrder": 3
+          },
+          {
+            "toyId": "B04",
+            "name": "灯塔鲸鱼",
+            "qualityId": "BLUE",
+            "collectionId": "COL_BLUE",
+            "shapeKey": "lighthouse_whale",
+            "sortOrder": 4
+          },
+          {
+            "toyId": "B05",
+            "name": "贝壳潜艇",
+            "qualityId": "BLUE",
+            "collectionId": "COL_BLUE",
+            "shapeKey": "shell_sub",
+            "sortOrder": 5
+          },
+          {
+            "toyId": "P01",
+            "name": "星轨魔猫",
+            "qualityId": "PURPLE",
+            "collectionId": "COL_PURPLE",
+            "shapeKey": "astral_cat",
+            "sortOrder": 1
+          },
+          {
+            "toyId": "P02",
+            "name": "月牙留声机",
+            "qualityId": "PURPLE",
+            "collectionId": "COL_PURPLE",
+            "shapeKey": "moon_gramophone",
+            "sortOrder": 2
+          },
+          {
+            "toyId": "P03",
+            "name": "水晶猫头鹰",
+            "qualityId": "PURPLE",
+            "collectionId": "COL_PURPLE",
+            "shapeKey": "crystal_owl",
+            "sortOrder": 3
+          },
+          {
+            "toyId": "P04",
+            "name": "银河小马",
+            "qualityId": "PURPLE",
+            "collectionId": "COL_PURPLE",
+            "shapeKey": "galaxy_pony",
+            "sortOrder": 4
+          },
+          {
+            "toyId": "P05",
+            "name": "彗星茶壶",
+            "qualityId": "PURPLE",
+            "collectionId": "COL_PURPLE",
+            "shapeKey": "comet_teapot",
+            "sortOrder": 5
+          },
+          {
+            "toyId": "R01",
+            "name": "火箭小熊",
+            "qualityId": "RED",
+            "collectionId": "COL_RED",
+            "shapeKey": "rocket_bear",
+            "sortOrder": 1
+          },
+          {
+            "toyId": "R02",
+            "name": "齿轮狮子",
+            "qualityId": "RED",
+            "collectionId": "COL_RED",
+            "shapeKey": "gear_lion",
+            "sortOrder": 2
+          },
+          {
+            "toyId": "R03",
+            "name": "灯笼狐狸",
+            "qualityId": "RED",
+            "collectionId": "COL_RED",
+            "shapeKey": "lantern_fox",
+            "sortOrder": 3
+          },
+          {
+            "toyId": "R04",
+            "name": "巡游火车",
+            "qualityId": "RED",
+            "collectionId": "COL_RED",
+            "shapeKey": "parade_train",
+            "sortOrder": 4
+          },
+          {
+            "toyId": "R05",
+            "name": "熔岩独角兽",
+            "qualityId": "RED",
+            "collectionId": "COL_RED",
+            "shapeKey": "lava_unicorn",
+            "sortOrder": 5
+          },
+          {
+            "toyId": "Y01",
+            "name": "皇冠龙蛋",
+            "qualityId": "GOLD",
+            "collectionId": "COL_GOLD",
+            "shapeKey": "crown_egg",
+            "sortOrder": 1
+          },
+          {
+            "toyId": "Y02",
+            "name": "日轮孔雀",
+            "qualityId": "GOLD",
+            "collectionId": "COL_GOLD",
+            "shapeKey": "sun_peacock",
+            "sortOrder": 2
+          },
+          {
+            "toyId": "Y03",
+            "name": "宝石城堡",
+            "qualityId": "GOLD",
+            "collectionId": "COL_GOLD",
+            "shapeKey": "gem_castle",
+            "sortOrder": 3
+          },
+          {
+            "toyId": "Y04",
+            "name": "金翼飞马",
+            "qualityId": "GOLD",
+            "collectionId": "COL_GOLD",
+            "shapeKey": "gold_pegasus",
+            "sortOrder": 4
+          },
+          {
+            "toyId": "Y05",
+            "name": "星冠凤凰",
+            "qualityId": "GOLD",
+            "collectionId": "COL_GOLD",
+            "shapeKey": "star_phoenix",
+            "sortOrder": 5
+          }
+        ],
+        "pacing": {}
+      },
+      {
+        "id": "QualityConvert",
+        "name": "重复品质转化",
+        "fields": [
+          {
+            "key": "qualityId",
+            "label": "品质ID",
+            "type": "string",
+            "required": true,
+            "description": "关联GachaToy"
+          },
+          {
+            "key": "pointResourceId",
+            "label": "积分资源ID",
+            "type": "string",
+            "required": true,
+            "description": "本期累计与可用积分的同一来源"
+          },
+          {
+            "key": "pointsPerDuplicate",
+            "label": "每件重复积分",
+            "type": "number",
+            "required": true,
+            "description": "策划已知值"
+          }
+        ],
+        "rows": [
+          {
+            "qualityId": "GREEN",
+            "pointResourceId": "EVENT_POINT",
+            "pointsPerDuplicate": 1
+          },
+          {
+            "qualityId": "BLUE",
+            "pointResourceId": "EVENT_POINT",
+            "pointsPerDuplicate": 2
+          },
+          {
+            "qualityId": "PURPLE",
+            "pointResourceId": "EVENT_POINT",
+            "pointsPerDuplicate": 3
+          },
+          {
+            "qualityId": "RED",
+            "pointResourceId": "EVENT_POINT",
+            "pointsPerDuplicate": 5
+          },
+          {
+            "qualityId": "GOLD",
+            "pointResourceId": "EVENT_POINT",
+            "pointsPerDuplicate": 10
+          }
+        ],
+        "pacing": {}
+      },
+      {
+        "id": "RewardCatalog",
+        "name": "非玩具奖励及发放承接",
+        "fields": [
+          {
+            "key": "rewardId",
+            "label": "奖励ID",
+            "type": "string",
+            "required": true,
+            "description": "序列、进度及商品引用"
+          },
+          {
+            "key": "name",
+            "label": "显示名称",
+            "type": "string",
+            "required": true,
+            "description": "结果、Info及领奖共用"
+          },
+          {
+            "key": "rewardType",
+            "label": "奖励类型",
+            "type": "string",
+            "required": true,
+            "description": "COIN／MAIN_ENERGY／BOARD_ITEM"
+          },
+          {
+            "key": "quantity",
+            "label": "单次数量",
+            "type": "number",
+            "required": true,
+            "description": "每次引用该奖励的实际数量"
+          },
+          {
+            "key": "delivery",
+            "label": "承接方式",
+            "type": "string",
+            "required": true,
+            "description": "MOCK_CREDIT／MOCK_PENDING；仅记账"
+          },
+          {
+            "key": "iconKey",
+            "label": "SVG图标键",
+            "type": "string",
+            "required": true,
+            "description": "共用绘制系统"
+          },
+          {
+            "key": "note",
+            "label": "用途",
+            "type": "string",
+            "required": true,
+            "description": "便于核对奖励来源"
+          }
+        ],
+        "rows": [
+          {
+            "rewardId": "COIN50",
+            "name": "金币",
+            "rewardType": "COIN",
+            "quantity": 50,
+            "delivery": "MOCK_CREDIT",
+            "iconKey": "coin_stack",
+            "note": "扭蛋序列"
+          },
+          {
+            "rewardId": "COIN100",
+            "name": "金币",
+            "rewardType": "COIN",
+            "quantity": 100,
+            "delivery": "MOCK_CREDIT",
+            "iconKey": "coin_stack",
+            "note": "品质及商品"
+          },
+          {
+            "rewardId": "COIN300",
+            "name": "金币",
+            "rewardType": "COIN",
+            "quantity": 300,
+            "delivery": "MOCK_CREDIT",
+            "iconKey": "coin_chest",
+            "note": "全收藏大奖"
+          },
+          {
+            "rewardId": "ENERGY10",
+            "name": "主线体力",
+            "rewardType": "MAIN_ENERGY",
+            "quantity": 10,
+            "delivery": "MOCK_CREDIT",
+            "iconKey": "energy_bolt",
+            "note": "扭蛋序列及阶段"
+          },
+          {
+            "rewardId": "ENERGY20",
+            "name": "主线体力",
+            "rewardType": "MAIN_ENERGY",
+            "quantity": 20,
+            "delivery": "MOCK_CREDIT",
+            "iconKey": "energy_bolt",
+            "note": "品质及商品"
+          },
+          {
+            "rewardId": "ENERGY40",
+            "name": "主线体力",
+            "rewardType": "MAIN_ENERGY",
+            "quantity": 40,
+            "delivery": "MOCK_CREDIT",
+            "iconKey": "energy_flask",
+            "note": "全收藏大奖"
+          },
+          {
+            "rewardId": "BOARD1",
+            "name": "星纹道具箱",
+            "rewardType": "BOARD_ITEM",
+            "quantity": 1,
+            "delivery": "MOCK_PENDING",
+            "iconKey": "star_crate",
+            "note": "仅记录模拟待领奖"
+          },
+          {
+            "rewardId": "BOARD2",
+            "name": "星纹道具箱",
+            "rewardType": "BOARD_ITEM",
+            "quantity": 2,
+            "delivery": "MOCK_PENDING",
+            "iconKey": "star_crate",
+            "note": "仅记录模拟待领奖"
+          }
+        ],
+        "pacing": {}
+      },
+      {
+        "id": "GachaSequence",
+        "name": "完整有序奖励房间",
+        "fields": [
+          {
+            "key": "periodId",
+            "label": "活动期次",
+            "type": "string",
+            "required": true,
+            "description": "关联ActivityConfig"
+          },
+          {
+            "key": "layerId",
+            "label": "适用分层",
+            "type": "string",
+            "required": true,
+            "description": "关联PlayerLayers"
+          },
+          {
+            "key": "sequenceGroup",
+            "label": "序列组",
+            "type": "string",
+            "required": true,
+            "description": "本期持续保存"
+          },
+          {
+            "key": "roomId",
+            "label": "RoomId",
+            "type": "number",
+            "required": true,
+            "description": "按升序读取"
+          },
+          {
+            "key": "orderedRewardsJson",
+            "label": "有序奖励JSON",
+            "type": "string",
+            "required": true,
+            "description": "JSON字符串：20个奖励ID组成的数组；G/B/P/R/Y前缀为ToyId，其余关联RewardCatalog；每项单次数量由对应表读取"
+          },
+          {
+            "key": "endRule",
+            "label": "读完本房间",
+            "type": "string",
+            "required": true,
+            "description": "NEXT_ROOM或LOOP_THIS_ROOM"
+          }
+        ],
+        "rows": [
+          {
+            "periodId": "DEMO_20260929",
+            "layerId": "DEFAULT",
+            "sequenceGroup": "SEQ_A",
+            "roomId": 101,
+            "orderedRewardsJson": "[\"G01\",\"G01\",\"B01\",\"P01\",\"R01\",\"Y01\",\"G02\",\"B02\",\"P02\",\"R02\",\"Y02\",\"G03\",\"B03\",\"P03\",\"R03\",\"Y03\",\"G04\",\"B04\",\"P04\",\"G01\"]",
+            "endRule": "NEXT_ROOM"
+          },
+          {
+            "periodId": "DEMO_20260929",
+            "layerId": "DEFAULT",
+            "sequenceGroup": "SEQ_A",
+            "roomId": 102,
+            "orderedRewardsJson": "[\"G01\",\"COIN50\",\"R04\",\"Y04\",\"G05\",\"B05\",\"P05\",\"R05\",\"Y05\",\"Y01\",\"Y05\",\"R05\",\"P05\",\"B05\",\"G05\",\"ENERGY10\",\"BOARD1\",\"Y05\",\"R01\",\"COIN50\"]",
+            "endRule": "NEXT_ROOM"
+          },
+          {
+            "periodId": "DEMO_20260929",
+            "layerId": "DEFAULT",
+            "sequenceGroup": "SEQ_A",
+            "roomId": 103,
+            "orderedRewardsJson": "[\"G01\",\"B01\",\"P01\",\"R01\",\"Y01\",\"COIN50\",\"G05\",\"B05\",\"P05\",\"R05\",\"Y05\",\"ENERGY10\",\"G02\",\"B02\",\"P02\",\"R02\",\"Y02\",\"BOARD1\",\"R05\",\"Y05\"]",
+            "endRule": "LOOP_THIS_ROOM"
+          }
+        ],
+        "pacing": {}
+      },
+      {
+        "id": "ProgressNodes",
+        "name": "可追踪主进度节点",
+        "fields": [
+          {
+            "key": "nodeId",
+            "label": "节点ID",
+            "type": "string",
+            "required": true,
+            "description": "主进度事件及领奖去重键"
+          },
+          {
+            "key": "nodeType",
+            "label": "节点类型",
+            "type": "string",
+            "required": true,
+            "description": "POINT／QUALITY／COMPLETE"
+          },
+          {
+            "key": "label",
+            "label": "节点文案",
+            "type": "string",
+            "required": true,
+            "description": "界面及事件日志共用"
+          },
+          {
+            "key": "target",
+            "label": "达成数值",
+            "type": "number",
+            "required": true,
+            "description": "累计积分或不同ToyId数"
+          },
+          {
+            "key": "collectionId",
+            "label": "收藏组ID",
+            "type": "string",
+            "required": true,
+            "description": "积分节点填ALL；品质节点与GachaToy关联"
+          },
+          {
+            "key": "rewardIdsJson",
+            "label": "奖励列表JSON",
+            "type": "string",
+            "required": true,
+            "description": "JSON字符串：RewardCatalog奖励ID数组；同一节点可含多项奖励"
+          },
+          {
+            "key": "claimMode",
+            "label": "领取方式",
+            "type": "string",
+            "required": true,
+            "description": "AUTO／MANUAL"
+          },
+          {
+            "key": "sortOrder",
+            "label": "展示及结算顺序",
+            "type": "number",
+            "required": true,
+            "description": "积分节点按门槛升序"
+          },
+          {
+            "key": "eventName",
+            "label": "进度事件",
+            "type": "string",
+            "required": true,
+            "description": "按平台契约上报的语义事件名"
+          }
+        ],
+        "rows": [
+          {
+            "nodeId": "PT01",
+            "nodeType": "POINT",
+            "label": "累计1分",
+            "target": 1,
+            "collectionId": "ALL",
+            "rewardIdsJson": "[\"COIN50\"]",
+            "claimMode": "AUTO",
+            "sortOrder": 1,
+            "eventName": "point_stage_awarded"
+          },
+          {
+            "nodeId": "PT02",
+            "nodeType": "POINT",
+            "label": "累计5分",
+            "target": 5,
+            "collectionId": "ALL",
+            "rewardIdsJson": "[\"ENERGY10\"]",
+            "claimMode": "AUTO",
+            "sortOrder": 2,
+            "eventName": "point_stage_awarded"
+          },
+          {
+            "nodeId": "PT03",
+            "nodeType": "POINT",
+            "label": "累计15分",
+            "target": 15,
+            "collectionId": "ALL",
+            "rewardIdsJson": "[\"BOARD1\"]",
+            "claimMode": "AUTO",
+            "sortOrder": 3,
+            "eventName": "point_stage_awarded"
+          },
+          {
+            "nodeId": "PT04",
+            "nodeType": "POINT",
+            "label": "累计30分",
+            "target": 30,
+            "collectionId": "ALL",
+            "rewardIdsJson": "[\"COIN100\"]",
+            "claimMode": "AUTO",
+            "sortOrder": 4,
+            "eventName": "point_stage_awarded"
+          },
+          {
+            "nodeId": "PT05",
+            "nodeType": "POINT",
+            "label": "累计55分",
+            "target": 55,
+            "collectionId": "ALL",
+            "rewardIdsJson": "[\"ENERGY20\",\"BOARD1\"]",
+            "claimMode": "AUTO",
+            "sortOrder": 5,
+            "eventName": "point_stage_awarded"
+          },
+          {
+            "nodeId": "COL_GREEN",
+            "nodeType": "QUALITY",
+            "label": "绿色玩具5/5",
+            "target": 5,
+            "collectionId": "COL_GREEN",
+            "rewardIdsJson": "[\"COIN100\"]",
+            "claimMode": "MANUAL",
+            "sortOrder": 6,
+            "eventName": "quality_reward_claimed"
+          },
+          {
+            "nodeId": "COL_BLUE",
+            "nodeType": "QUALITY",
+            "label": "蓝色玩具5/5",
+            "target": 5,
+            "collectionId": "COL_BLUE",
+            "rewardIdsJson": "[\"ENERGY20\"]",
+            "claimMode": "MANUAL",
+            "sortOrder": 7,
+            "eventName": "quality_reward_claimed"
+          },
+          {
+            "nodeId": "COL_PURPLE",
+            "nodeType": "QUALITY",
+            "label": "紫色玩具5/5",
+            "target": 5,
+            "collectionId": "COL_PURPLE",
+            "rewardIdsJson": "[\"BOARD1\"]",
+            "claimMode": "MANUAL",
+            "sortOrder": 8,
+            "eventName": "quality_reward_claimed"
+          },
+          {
+            "nodeId": "COL_RED",
+            "nodeType": "QUALITY",
+            "label": "红色玩具5/5",
+            "target": 5,
+            "collectionId": "COL_RED",
+            "rewardIdsJson": "[\"COIN100\",\"BOARD1\"]",
+            "claimMode": "MANUAL",
+            "sortOrder": 9,
+            "eventName": "quality_reward_claimed"
+          },
+          {
+            "nodeId": "COL_GOLD",
+            "nodeType": "QUALITY",
+            "label": "金色玩具5/5",
+            "target": 5,
+            "collectionId": "COL_GOLD",
+            "rewardIdsJson": "[\"ENERGY20\",\"BOARD1\"]",
+            "claimMode": "MANUAL",
+            "sortOrder": 10,
+            "eventName": "quality_reward_claimed"
+          },
+          {
+            "nodeId": "COL_ALL",
+            "nodeType": "COMPLETE",
+            "label": "全部玩具25/25",
+            "target": 25,
+            "collectionId": "ALL",
+            "rewardIdsJson": "[\"COIN300\",\"ENERGY40\",\"BOARD2\"]",
+            "claimMode": "AUTO",
+            "sortOrder": 11,
+            "eventName": "collection_completed"
+          }
+        ],
+        "pacing": {}
+      },
+      {
+        "id": "GachaShop",
+        "name": "全收藏积分商品",
+        "fields": [
+          {
+            "key": "id",
+            "label": "商品ID",
+            "type": "string",
+            "required": true,
+            "description": "兑换次数及事务去重关联"
+          },
+          {
+            "key": "rewardId",
+            "label": "奖励ID",
+            "type": "string",
+            "required": true,
+            "description": "指向RewardCatalog"
+          },
+          {
+            "key": "pointPrice",
+            "label": "单次积分价格",
+            "type": "number",
+            "required": true,
+            "description": "必须大于0"
+          },
+          {
+            "key": "exchangeLimit",
+            "label": "本期兑换上限",
+            "type": "number",
+            "required": true,
+            "description": "-1不限次；不使用0"
+          },
+          {
+            "key": "sortOrder",
+            "label": "显示顺序",
+            "type": "number",
+            "required": true,
+            "description": "升序"
+          }
+        ],
+        "rows": [
+          {
+            "id": "SHOP01",
+            "rewardId": "COIN100",
+            "pointPrice": 3,
+            "exchangeLimit": -1,
+            "sortOrder": 1
+          },
+          {
+            "id": "SHOP02",
+            "rewardId": "ENERGY20",
+            "pointPrice": 10,
+            "exchangeLimit": 3,
+            "sortOrder": 2
+          },
+          {
+            "id": "SHOP03",
+            "rewardId": "BOARD2",
+            "pointPrice": 25,
+            "exchangeLimit": 1,
+            "sortOrder": 3
+          }
+        ],
+        "pacing": {}
+      },
+      {
+        "id": "UiCopy",
+        "name": "可配置规则文案、提示及引导",
+        "fields": [
+          {
+            "key": "copyId",
+            "label": "文案ID",
+            "type": "string",
+            "required": true,
+            "description": "界面引用键"
+          },
+          {
+            "key": "screen",
+            "label": "所属界面",
+            "type": "string",
+            "required": true,
+            "description": "screen ID或COMMON"
+          },
+          {
+            "key": "text",
+            "label": "显示文本",
+            "type": "string",
+            "required": true,
+            "description": "演示默认文案"
+          },
+          {
+            "key": "sortOrder",
+            "label": "阅读顺序",
+            "type": "number",
+            "required": true,
+            "description": "同界面从小到大"
+          }
+        ],
+        "rows": [
+          {
+            "copyId": "TITLE",
+            "screen": "machine",
+            "text": "七天扭蛋奇遇",
+            "sortOrder": 1
+          },
+          {
+            "copyId": "COVER",
+            "screen": "cover",
+            "text": "扭动旋钮，收集25件玩具！重复玩具会化作积分，集齐后解锁兑换商店。",
+            "sortOrder": 1
+          },
+          {
+            "copyId": "TICKET_LOW",
+            "screen": "machine",
+            "text": "扭蛋券不足，请完成订单或使用主线生成器获取",
+            "sortOrder": 2
+          },
+          {
+            "copyId": "SHOP_LOCK",
+            "screen": "shop",
+            "text": "需要集齐全部收藏解锁兑换商城",
+            "sortOrder": 1
+          },
+          {
+            "copyId": "POINT_LOW",
+            "screen": "shop",
+            "text": "积分不足，请继续扭蛋获取",
+            "sortOrder": 2
+          },
+          {
+            "copyId": "INFO_SCOPE",
+            "screen": "info",
+            "text": "以下为当前分层固定序列的投放占比，不是下一抽独立概率；首次玩具点亮收藏，重复玩具按品质转化积分。×3、×5、×10连续读取对应项数。显示百分比可能因四舍五入产生尾差。",
+            "sortOrder": 1
+          },
+          {
+            "copyId": "RULE_SUPPLY",
+            "screen": "rulesGuide",
+            "text": "符合条件的订单结算或生成器有效产出可获得扭蛋券。本Demo请主动点击Debug模拟供券；正式截止后停止外部供券。",
+            "sortOrder": 1
+          },
+          {
+            "copyId": "RULE_DRAW",
+            "screen": "rulesGuide",
+            "text": "选择倍率并消耗对应扭蛋券，按房间与序列顺序逐项抽取；批量倍率不放大奖励数量。",
+            "sortOrder": 2
+          },
+          {
+            "copyId": "RULE_COLLECT",
+            "screen": "rulesGuide",
+            "text": "收集绿、蓝、紫、红、金各5件玩具。各品质集齐后手动领奖；25件全收集后自动领取大奖并解锁商店。",
+            "sortOrder": 3
+          },
+          {
+            "copyId": "RULE_POINT",
+            "screen": "rulesGuide",
+            "text": "重复玩具分别转化1、2、3、5、10分。累计积分达标自动领奖；兑换仅消耗可用积分，不回退累计进度。",
+            "sortOrder": 4
+          },
+          {
+            "copyId": "RULE_END",
+            "screen": "rulesGuide",
+            "text": "全收藏后仍可抽取和兑换。到期停止外部供券；离开到期会话并完成补发后，剩余扭蛋券与积分清零，不继承下期。",
+            "sortOrder": 5
+          },
+          {
+            "copyId": "GUIDE_1",
+            "screen": "rulesGuide",
+            "text": "先看扭蛋券：订单结算和生成器有效产出是券的外部来源，使用Debug可分别模拟成功或失败。",
+            "sortOrder": 11
+          },
+          {
+            "copyId": "GUIDE_2",
+            "screen": "rulesGuide",
+            "text": "选择×1、×3、×5或×10；每档连续抽取对应数量的序列结果。",
+            "sortOrder": 12
+          },
+          {
+            "copyId": "GUIDE_3",
+            "screen": "rulesGuide",
+            "text": "新玩具点亮收藏；同一件再出现会转化为积分。",
+            "sortOrder": 13
+          },
+          {
+            "copyId": "GUIDE_4",
+            "screen": "rulesGuide",
+            "text": "查看五条品质收藏线，满5件后记得手动领取品质奖励。",
+            "sortOrder": 14
+          },
+          {
+            "copyId": "GUIDE_5",
+            "screen": "rulesGuide",
+            "text": "累计积分会点亮机台上方的阶段奖章；可用积分留待全收藏后兑换。",
+            "sortOrder": 15
+          },
+          {
+            "copyId": "SHOP_UNLOCK",
+            "screen": "shop",
+            "text": "25件玩具已集齐！积分兑换商店现已开放。",
+            "sortOrder": 3
+          },
+          {
+            "copyId": "END",
+            "screen": "ending",
+            "text": "本期扭蛋奇遇已结束。已达成而未到账的奖励将在结束说明后补发。",
+            "sortOrder": 1
+          },
+          {
+            "copyId": "TIME_UNKNOWN",
+            "screen": "unavailable",
+            "text": "服务器时间尚未确认，活动暂为只读；不会清理已有资产。",
+            "sortOrder": 1
+          },
+          {
+            "copyId": "SAVE_ERROR",
+            "screen": "unavailable",
+            "text": "活动存档暂不可用，抽取和兑换已暂停，避免重复扣费或发奖。",
+            "sortOrder": 2
+          }
+        ],
+        "pacing": {}
+      },
+      {
+        "id": "VisualTheme",
+        "name": "统一主题及动效参数",
+        "fields": [
+          {
+            "key": "themeId",
+            "label": "主题ID",
+            "type": "string",
+            "required": true,
+            "description": "全部页面及弹层共用"
+          },
+          {
+            "key": "background",
+            "label": "夜场背景",
+            "type": "string",
+            "required": true,
+            "description": "CSS颜色"
+          },
+          {
+            "key": "machine",
+            "label": "机身主色",
+            "type": "string",
+            "required": true,
+            "description": "CSS颜色"
+          },
+          {
+            "key": "glass",
+            "label": "玻璃辅色",
+            "type": "string",
+            "required": true,
+            "description": "CSS颜色"
+          },
+          {
+            "key": "gold",
+            "label": "金属描边",
+            "type": "string",
+            "required": true,
+            "description": "CSS颜色"
+          },
+          {
+            "key": "surface",
+            "label": "弹层表面",
+            "type": "string",
+            "required": true,
+            "description": "CSS颜色"
+          },
+          {
+            "key": "qualityColorsJson",
+            "label": "品质色JSON",
+            "type": "string",
+            "required": true,
+            "description": "JSON字符串：GREEN／BLUE／PURPLE／RED／GOLD映射CSS颜色"
+          },
+          {
+            "key": "fontStack",
+            "label": "字体栈",
+            "type": "string",
+            "required": true,
+            "description": "本地系统字体，不请求网络"
+          },
+          {
+            "key": "titlePx",
+            "label": "标题字号",
+            "type": "number",
+            "required": true,
+            "description": "像素"
+          },
+          {
+            "key": "bodyPx",
+            "label": "正文字号",
+            "type": "number",
+            "required": true,
+            "description": "像素"
+          },
+          {
+            "key": "spacingJson",
+            "label": "间距JSON",
+            "type": "string",
+            "required": true,
+            "description": "JSON字符串：单位px的间距数组"
+          },
+          {
+            "key": "radiusPx",
+            "label": "弹层圆角",
+            "type": "number",
+            "required": true,
+            "description": "像素"
+          },
+          {
+            "key": "outlinePx",
+            "label": "主体描边",
+            "type": "number",
+            "required": true,
+            "description": "像素"
+          },
+          {
+            "key": "shadow",
+            "label": "阴影",
+            "type": "string",
+            "required": true,
+            "description": "CSS双层阴影"
+          },
+          {
+            "key": "motionMs",
+            "label": "抽取反馈时长",
+            "type": "number",
+            "required": true,
+            "description": "仅表现，不决定结算时点"
+          },
+          {
+            "key": "minTouchPx",
+            "label": "最小触控尺寸",
+            "type": "number",
+            "required": true,
+            "description": "至少44像素"
+          }
+        ],
+        "rows": [
+          {
+            "themeId": "GACHA_NIGHT",
+            "background": "#201B45",
+            "machine": "#D94F61",
+            "glass": "#82D9E9",
+            "gold": "#F5C96D",
+            "surface": "#FFF4DF",
+            "qualityColorsJson": "{\"GREEN\":\"#65C887\",\"BLUE\":\"#65B8ED\",\"PURPLE\":\"#A482EB\",\"RED\":\"#EC7280\",\"GOLD\":\"#F3C45B\"}",
+            "fontStack": "system-ui, 'PingFang SC', 'Microsoft YaHei', sans-serif",
+            "titlePx": 26,
+            "bodyPx": 15,
+            "spacingJson": "[8,12,16,24]",
+            "radiusPx": 18,
+            "outlinePx": 3,
+            "shadow": "0 5px 0 #793744, 0 16px 32px rgba(16,12,43,.35)",
+            "motionMs": 850,
+            "minTouchPx": 44
+          }
+        ],
+        "pacing": {}
+      }
+    ],
+    "primaryTableId": "ProgressNodes",
+    "sourceDocumentUpdatedAt": "2026-09-29T08:07:13.145Z"
+  }
+}

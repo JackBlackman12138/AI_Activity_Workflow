@@ -1,0 +1,55 @@
+{
+  "id": "QualityConvert",
+  "name": "重复品质转化",
+  "fields": [
+    {
+      "key": "qualityId",
+      "label": "品质ID",
+      "type": "string",
+      "required": true,
+      "description": "关联GachaToy"
+    },
+    {
+      "key": "pointResourceId",
+      "label": "积分资源ID",
+      "type": "string",
+      "required": true,
+      "description": "本期累计与可用积分的同一来源"
+    },
+    {
+      "key": "pointsPerDuplicate",
+      "label": "每件重复积分",
+      "type": "number",
+      "required": true,
+      "description": "策划已知值"
+    }
+  ],
+  "rows": [
+    {
+      "qualityId": "GREEN",
+      "pointResourceId": "EVENT_POINT",
+      "pointsPerDuplicate": 1
+    },
+    {
+      "qualityId": "BLUE",
+      "pointResourceId": "EVENT_POINT",
+      "pointsPerDuplicate": 2
+    },
+    {
+      "qualityId": "PURPLE",
+      "pointResourceId": "EVENT_POINT",
+      "pointsPerDuplicate": 3
+    },
+    {
+      "qualityId": "RED",
+      "pointResourceId": "EVENT_POINT",
+      "pointsPerDuplicate": 5
+    },
+    {
+      "qualityId": "GOLD",
+      "pointResourceId": "EVENT_POINT",
+      "pointsPerDuplicate": 10
+    }
+  ],
+  "pacing": {}
+}

@@ -1,0 +1,139 @@
+{
+  "id": "VisualTheme",
+  "name": "统一主题及动效参数",
+  "fields": [
+    {
+      "key": "themeId",
+      "label": "主题ID",
+      "type": "string",
+      "required": true,
+      "description": "全部页面及弹层共用"
+    },
+    {
+      "key": "background",
+      "label": "夜场背景",
+      "type": "string",
+      "required": true,
+      "description": "CSS颜色"
+    },
+    {
+      "key": "machine",
+      "label": "机身主色",
+      "type": "string",
+      "required": true,
+      "description": "CSS颜色"
+    },
+    {
+      "key": "glass",
+      "label": "玻璃辅色",
+      "type": "string",
+      "required": true,
+      "description": "CSS颜色"
+    },
+    {
+      "key": "gold",
+      "label": "金属描边",
+      "type": "string",
+      "required": true,
+      "description": "CSS颜色"
+    },
+    {
+      "key": "surface",
+      "label": "弹层表面",
+      "type": "string",
+      "required": true,
+      "description": "CSS颜色"
+    },
+    {
+      "key": "qualityColorsJson",
+      "label": "品质色JSON",
+      "type": "string",
+      "required": true,
+      "description": "JSON字符串：GREEN／BLUE／PURPLE／RED／GOLD映射CSS颜色"
+    },
+    {
+      "key": "fontStack",
+      "label": "字体栈",
+      "type": "string",
+      "required": true,
+      "description": "本地系统字体，不请求网络"
+    },
+    {
+      "key": "titlePx",
+      "label": "标题字号",
+      "type": "number",
+      "required": true,
+      "description": "像素"
+    },
+    {
+      "key": "bodyPx",
+      "label": "正文字号",
+      "type": "number",
+      "required": true,
+      "description": "像素"
+    },
+    {
+      "key": "spacingJson",
+      "label": "间距JSON",
+      "type": "string",
+      "required": true,
+      "description": "JSON字符串：单位px的间距数组"
+    },
+    {
+      "key": "radiusPx",
+      "label": "弹层圆角",
+      "type": "number",
+      "required": true,
+      "description": "像素"
+    },
+    {
+      "key": "outlinePx",
+      "label": "主体描边",
+      "type": "number",
+      "required": true,
+      "description": "像素"
+    },
+    {
+      "key": "shadow",
+      "label": "阴影",
+      "type": "string",
+      "required": true,
+      "description": "CSS双层阴影"
+    },
+    {
+      "key": "motionMs",
+      "label": "抽取反馈时长",
+      "type": "number",
+      "required": true,
+      "description": "仅表现，不决定结算时点"
+    },
+    {
+      "key": "minTouchPx",
+      "label": "最小触控尺寸",
+      "type": "number",
+      "required": true,
+      "description": "至少44像素"
+    }
+  ],
+  "rows": [
+    {
+      "themeId": "GACHA_NIGHT",
+      "background": "#201B45",
+      "machine": "#D94F61",
+      "glass": "#82D9E9",
+      "gold": "#F5C96D",
+      "surface": "#FFF4DF",
+      "qualityColorsJson": "{\"GREEN\":\"#65C887\",\"BLUE\":\"#65B8ED\",\"PURPLE\":\"#A482EB\",\"RED\":\"#EC7280\",\"GOLD\":\"#F3C45B\"}",
+      "fontStack": "system-ui, 'PingFang SC', 'Microsoft YaHei', sans-serif",
+      "titlePx": 26,
+      "bodyPx": 15,
+      "spacingJson": "[8,12,16,24]",
+      "radiusPx": 18,
+      "outlinePx": 3,
+      "shadow": "0 5px 0 #793744, 0 16px 32px rgba(16,12,43,.35)",
+      "motionMs": 850,
+      "minTouchPx": 44
+    }
+  ],
+  "pacing": {}
+}

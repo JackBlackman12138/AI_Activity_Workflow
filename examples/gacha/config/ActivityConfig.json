@@ -1,0 +1,99 @@
+{
+  "id": "ActivityConfig",
+  "name": "活动期次与全局规则",
+  "fields": [
+    {
+      "key": "periodId",
+      "label": "期次",
+      "type": "string",
+      "required": true,
+      "description": "全部配置与事件的关联键"
+    },
+    {
+      "key": "startAt",
+      "label": "开始时间",
+      "type": "string",
+      "required": true,
+      "description": "ISO时间，由模拟服务器时钟解释"
+    },
+    {
+      "key": "endAt",
+      "label": "正式截止",
+      "type": "string",
+      "required": true,
+      "description": "停止外部供券的ISO时间"
+    },
+    {
+      "key": "dayCutHour",
+      "label": "活动日切小时",
+      "type": "number",
+      "required": true,
+      "description": "已知值3；不重置资产"
+    },
+    {
+      "key": "minLevel",
+      "label": "最低等级",
+      "type": "number",
+      "required": true,
+      "description": "已知值7"
+    },
+    {
+      "key": "requiredWave",
+      "label": "前置订单波次",
+      "type": "number",
+      "required": true,
+      "description": "已知值6；仅Debug模拟资格"
+    },
+    {
+      "key": "initialTickets",
+      "label": "初始券",
+      "type": "number",
+      "required": true,
+      "description": "首次初始化一次"
+    },
+    {
+      "key": "settlementDays",
+      "label": "结算展示天数",
+      "type": "number",
+      "required": true,
+      "description": "已知值2"
+    },
+    {
+      "key": "switchState",
+      "label": "开关",
+      "type": "string",
+      "required": true,
+      "description": "OPEN／SOFT_OFF／HARD_OFF；Debug可调整"
+    },
+    {
+      "key": "timeTrusted",
+      "label": "时间可信",
+      "type": "boolean",
+      "required": true,
+      "description": "否时只读、不结算"
+    },
+    {
+      "key": "guideGiftTickets",
+      "label": "引导赠券",
+      "type": "number",
+      "required": true,
+      "description": "演示设0"
+    }
+  ],
+  "rows": [
+    {
+      "periodId": "DEMO_20260929",
+      "startAt": "2026-09-29T03:00:00+08:00",
+      "endAt": "2026-10-06T03:00:00+08:00",
+      "dayCutHour": 3,
+      "minLevel": 7,
+      "requiredWave": 6,
+      "initialTickets": 3,
+      "settlementDays": 2,
+      "switchState": "OPEN",
+      "timeTrusted": true,
+      "guideGiftTickets": 0
+    }
+  ],
+  "pacing": {}
+}

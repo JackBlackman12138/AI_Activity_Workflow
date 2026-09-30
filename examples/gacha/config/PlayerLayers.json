@@ -1,0 +1,51 @@
+{
+  "id": "PlayerLayers",
+  "name": "演示玩家分层与序列选择",
+  "fields": [
+    {
+      "key": "layerId",
+      "label": "分层ID",
+      "type": "string",
+      "required": true,
+      "description": "本期首次初始化后持续保存"
+    },
+    {
+      "key": "sequenceGroup",
+      "label": "选中序列组",
+      "type": "string",
+      "required": true,
+      "description": "指向GachaSequence"
+    },
+    {
+      "key": "selection",
+      "label": "选取方式",
+      "type": "string",
+      "required": true,
+      "description": "FIXED表示无随机选组"
+    },
+    {
+      "key": "initialRoomId",
+      "label": "初始房间",
+      "type": "number",
+      "required": true,
+      "description": "首次初始化游标"
+    },
+    {
+      "key": "initialIndex",
+      "label": "初始位置",
+      "type": "number",
+      "required": true,
+      "description": "从1开始的序列位置"
+    }
+  ],
+  "rows": [
+    {
+      "layerId": "DEFAULT",
+      "sequenceGroup": "SEQ_A",
+      "selection": "FIXED",
+      "initialRoomId": 101,
+      "initialIndex": 1
+    }
+  ],
+  "pacing": {}
+}

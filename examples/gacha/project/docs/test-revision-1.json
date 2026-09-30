@@ -1,0 +1,124 @@
+{
+  "reason": "策划入口资格规则与功能审查 I01：资格、互斥或资源条件不满足时入口不显示，保留具体原因和 Debug；原测试点击不存在的入口并期待 toast 与此规则冲突。改为断言入口数量为0及可见原因，保留恢复资格后进入封面的原验收。",
+  "previous": {
+    "id": "GACHA_01",
+    "name": "资格不足拒绝进入，恢复资格后展示首次封面",
+    "requirements": [
+      "R01"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"debug-open\"]"
+      },
+      {
+        "action": "fill",
+        "selector": "[data-screen=\"debug\"] [data-debug-field=\"level\"]",
+        "value": "6"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-apply\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-close\"]:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"entry-open\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": ".activity-toast",
+        "value": "活动入口当前不可用"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"debug-open\"]"
+      },
+      {
+        "action": "fill",
+        "selector": "[data-screen=\"debug\"] [data-debug-field=\"level\"]",
+        "value": "7"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-apply\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-close\"]:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"entry-open\"]"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen=\"cover\"] [data-action=\"cover-start\"]"
+      }
+    ]
+  },
+  "revised": {
+    "id": "GACHA_01",
+    "name": "资格不足隐藏入口并说明原因，恢复资格后展示首次封面",
+    "requirements": [
+      "R01"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"debug-open\"]"
+      },
+      {
+        "action": "fill",
+        "selector": "[data-screen=\"debug\"] [data-debug-field=\"level\"]",
+        "value": "6"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-apply\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-close\"]:not(.modal-close)"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"entry\"] [data-action=\"entry-open\"]",
+        "count": 0
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"entry\"] .entry-unavailable",
+        "value": "需要达到7级"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"debug-open\"]"
+      },
+      {
+        "action": "fill",
+        "selector": "[data-screen=\"debug\"] [data-debug-field=\"level\"]",
+        "value": "7"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-apply\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-close\"]:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"entry-open\"]"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen=\"cover\"] [data-action=\"cover-start\"]"
+      }
+    ]
+  }
+}

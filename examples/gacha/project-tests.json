@@ -1,0 +1,3220 @@
+[
+  {
+    "id": "GACHA_01",
+    "name": "资格不足隐藏入口并说明原因，恢复资格后展示首次封面",
+    "requirements": [
+      "R01"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"debug-open\"]"
+      },
+      {
+        "action": "fill",
+        "selector": "[data-screen=\"debug\"] [data-debug-field=\"level\"]",
+        "value": "6"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-apply\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-close\"]:not(.modal-close)"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"entry\"] [data-action=\"entry-open\"]",
+        "count": 0
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"entry\"] .entry-unavailable",
+        "value": "需要达到7级"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"debug-open\"]"
+      },
+      {
+        "action": "fill",
+        "selector": "[data-screen=\"debug\"] [data-debug-field=\"level\"]",
+        "value": "7"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-apply\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-close\"]:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"entry-open\"]"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen=\"cover\"] [data-action=\"cover-start\"]"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_02",
+    "name": "封面和引导不重复展示，关闭、重进及刷新保留初始券",
+    "requirements": [
+      "R01",
+      "R06"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"entry-open\"]"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen=\"cover\"] [data-action=\"cover-start\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"cover\"] [data-action=\"cover-start\"]"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen=\"guide\"] [data-action=\"guide-next\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"guide\"] .modal-header [data-action=\"guide-skip\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": ".ticket-pill",
+        "value": "扭蛋券 3"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"machine-close\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"entry-open\"]"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen=\"machine\"] [data-action=\"draw\"]"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"cover\"]",
+        "count": 0
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"guide\"]",
+        "count": 0
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "expectText",
+        "selector": ".ticket-pill",
+        "value": "扭蛋券 3"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_03",
+    "name": "Debug 供券成功、失败、未命中、事件去重及截止拒绝",
+    "requirements": [
+      "R02"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"entry-open\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"cover\"] [data-action=\"cover-start\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"guide\"] .modal-header [data-action=\"guide-skip\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"debug-open\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-order-success\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-debug-receipt]",
+        "value": "实际 5 张"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-replay\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-debug-receipt]",
+        "value": "去重"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-order-fail\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-debug-receipt]",
+        "value": "实际 0 张"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-generator-miss\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-debug-receipt]",
+        "value": "未命中"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-generator-fail\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-debug-receipt]",
+        "value": "实际 0 张"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-generator-hit\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-debug-receipt]",
+        "value": "实际 2 张"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-close\"]:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": ".ticket-pill",
+        "value": "扭蛋券 10"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"debug-open\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-expire\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-order-success\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-debug-receipt]",
+        "value": "外部供券已停止"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-close\"]:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": ".ticket-pill",
+        "value": "扭蛋券 10"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_04",
+    "name": "四档倍率逐项抽取、同批重复转积分、跨房间及券不足不降档",
+    "requirements": [
+      "R03",
+      "R04"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"entry-open\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"cover\"] [data-action=\"cover-start\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"guide\"] .modal-header [data-action=\"guide-skip\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"debug-open\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-order-success\"]",
+        "count": 4
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-close\"]:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": ".ticket-pill",
+        "value": "扭蛋券 23"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"draw\"]"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"drawResult\"] .result-item",
+        "count": 1
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"drawResult\"] [data-action=\"result-close\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action=\"tier-select\"][data-tier-id=\"X3\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"draw\"]"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"drawResult\"] .result-item",
+        "count": 3
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"drawResult\"] .duplicate-points",
+        "value": "重复 +1 积分"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"drawResult\"] [data-action=\"result-close\"]"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen=\"claim\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"claim\"] .modal-header [data-action=\"popup-close\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action=\"tier-select\"][data-tier-id=\"X5\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"draw\"]"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"drawResult\"] .result-item",
+        "count": 5
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"drawResult\"] [data-action=\"result-close\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action=\"tier-select\"][data-tier-id=\"X10\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"draw\"]"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"drawResult\"] .result-item",
+        "count": 10
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"drawResult\"] [data-action=\"result-close\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": ".ticket-pill",
+        "value": "扭蛋券 4"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action=\"tier-select\"][data-tier-id=\"X3\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"draw\"]"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"drawResult\"] .result-item",
+        "count": 3
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"drawResult\"] .result-summary",
+        "value": "重复玩具合计 +2 积分"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"drawResult\"] .result-grid",
+        "value": "金币"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"drawResult\"] [data-action=\"result-close\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": ".ticket-pill",
+        "value": "扭蛋券 1"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action=\"tier-select\"][data-tier-id=\"X10\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"draw\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": ".activity-toast",
+        "value": "扭蛋券不足，请完成订单或使用主线生成器获取"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-action=\"tier-select\"][data-tier-id=\"X10\"]",
+        "value": "×10"
+      },
+      {
+        "action": "expectText",
+        "selector": ".ticket-pill",
+        "value": "扭蛋券 1"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"debug-open\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"debug\"] .debug-section:has(h3:has-text('奖励账本'))",
+        "value": "模拟到账"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-close\"]:not(.modal-close)"
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "expectText",
+        "selector": ".ticket-pill",
+        "value": "扭蛋券 1"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_05",
+    "name": "抽取前查看固定序列逐项投放占比及末房间循环范围",
+    "requirements": [
+      "R05"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"entry-open\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"cover\"] [data-action=\"cover-start\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"guide\"] .modal-header [data-action=\"guide-skip\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"info-open\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"info\"] .info-intro",
+        "value": "不是下一抽独立概率"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"info\"] .info-intro",
+        "value": "60 项"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"info\"] .share-row .toy-art",
+        "count": 25
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"info\"] .share-row",
+        "count": 28
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"info\"] .share-row:first-child .share-percent",
+        "value": "8.33%"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"info\"] .share-list",
+        "value": "星纹道具箱"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"info\"] [data-action=\"info-scope\"][data-scope=\"LOOP\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"info\"] .info-intro",
+        "value": "20 项"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"info\"] .share-row:first-child .share-percent",
+        "value": "5.00%"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"info\"] .modal-header [data-action=\"panel-back\"]"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen=\"machine\"] [data-action=\"draw\"]"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_06",
+    "name": "集齐25件后自动发放大奖，品质奖励仍须分别手动领取",
+    "requirements": [
+      "R04",
+      "R06"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen=\"entry\"] [data-action=\"entry-open\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"cover\"] [data-action=\"cover-start\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"guide\"] .modal-header [data-action=\"guide-skip\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"collection-open\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"collection\"] .collection-total",
+        "value": "0/25"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"collection\"] .toy-tile.is-locked",
+        "count": 25
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"collection\"] .modal-header [data-action=\"panel-back\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"debug-open\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-order-success\"]",
+        "count": 6
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"debug\"] [data-action=\"debug-close\"]:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action=\"tier-select\"][data-tier-id=\"X10\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"draw\"]"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"drawResult\"] .result-item",
+        "count": 10
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"drawResult\"] .result-summary",
+        "value": "重复玩具合计 +1 积分"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"drawResult\"] [data-action=\"result-close\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"claim\"] .modal-header",
+        "value": "累计1分"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"claim\"] .modal-header [data-action=\"popup-close\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"draw\"]"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"drawResult\"] .result-item",
+        "count": 10
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"drawResult\"] [data-action=\"result-close\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"draw\"]"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"drawResult\"] .result-item",
+        "count": 10
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"drawResult\"] [data-action=\"result-close\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"claim\"] .modal-header",
+        "value": "累计5分"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"claim\"] .modal-header [data-action=\"popup-close\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"claim\"] .modal-header",
+        "value": "全部玩具25/25"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"claim\"] .modal-header [data-action=\"popup-close\"]"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen=\"shopUnlock\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"shopUnlock\"] .modal-header [data-action=\"popup-close\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"collection-open\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"collection\"] .collection-total",
+        "value": "25/25"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"collection\"] .toy-tile.is-owned",
+        "count": 25
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"collection\"] .complete-reward",
+        "value": "已自动发放"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen=\"collection\"] [data-action=\"claim-node\"]:not(:disabled)",
+        "count": 5
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"collection\"] [data-action=\"claim-node\"][data-node-id=\"COL_GREEN\"]"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-local-claim=\"COL_GREEN\"] [data-action=\"claim-confirm\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-local-claim=\"COL_GREEN\"] [data-action=\"claim-confirm\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"claim\"] .modal-content",
+        "value": "不会重复发放"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"claim\"] .modal-header [data-action=\"popup-close\"]"
+      },
+      {
+        "action": "expectDisabled",
+        "selector": "[data-screen=\"collection\"] [data-action=\"claim-node\"][data-node-id=\"COL_GREEN\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"collection\"] .modal-header [data-action=\"panel-back\"]"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen=\"machine\"] [data-action=\"shop-open\"]"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen=\"shop\"] .shop-note",
+        "value": "积分兑换商店现已开放"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_07",
+    "name": "首次封面、引导中断、规则说明与重进",
+    "requirements": [
+      "R08",
+      "R12"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-action='entry-open']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='guide'] [data-action='guide-next']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] [data-action='guide-next']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='guide'] .guide-progress",
+        "value": "2 / 5"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] [data-action='guide-skip']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='rules-open']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='rulesGuide'] .rules-list",
+        "value": "Debug模拟供券"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='rulesGuide'] .rules-list",
+        "value": "累计积分"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='rulesGuide'] .rules-list",
+        "value": "兑换商店"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='rulesGuide'] [data-action='panel-back']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='machine-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='entry-open']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='cover']",
+        "count": 0
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='machine'] [data-action='draw']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "3"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_08",
+    "name": "Info 完整列表、统计范围与倍率保留",
+    "requirements": [
+      "R08",
+      "R12"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] [data-action='guide-skip']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='tier-select'][data-tier-id='X5']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='info-open']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='info'] [data-scroll-region='info']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='info'] .share-row[data-quality]",
+        "count": 25
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='info'] .info-intro",
+        "value": "60 项"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='info'] .share-list .share-row:nth-child(25)",
+        "value": "星冠凤凰"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='info'] [data-action='info-scope'][data-scope='LOOP']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='info'] .info-intro",
+        "value": "20 项"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='info'] [data-action='panel-back']:not(.modal-close)"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-action='tier-select'][data-tier-id='X5'][aria-pressed='true']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-action='draw']",
+        "value": "消耗 5 张扭蛋券"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_09",
+    "name": "全收藏后兑换：锁定、取消、扣分、积分不足与售罄",
+    "requirements": [
+      "R07",
+      "R10",
+      "R11"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] [data-action='guide-skip']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='shop-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shop'] [data-item-id='SHOP01'] [data-action='exchange-open']"
+      },
+      {
+        "action": "expectText",
+        "selector": ".activity-toast",
+        "value": "需要集齐全部收藏解锁兑换商城"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shop'] [data-action='panel-back']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-order-success']",
+        "count": 9
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] [data-debug-receipt]",
+        "value": "实际 5 张"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "48"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='tier-select'][data-tier-id='X10']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='drawResult'] .result-item",
+        "count": 10
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='shopUnlock'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shopUnlock'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)",
+        "count": 2
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .progress-heading",
+        "value": "49"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='shop-open']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='shop'] .shop-balance",
+        "value": "49"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shop'] [data-item-id='SHOP03'] [data-action='exchange-open']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='exchangeConfirm'] [data-action='exchange-confirm']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='exchangeConfirm'] [data-action='exchange-cancel']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='shop'] .shop-balance",
+        "value": "49"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shop'] [data-item-id='SHOP03'] [data-action='exchange-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='exchangeConfirm'] [data-action='exchange-confirm']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='shop'] .shop-balance",
+        "value": "24"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='shop'] article[data-item-id='SHOP03']",
+        "value": "已售罄"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shop'] [data-item-id='SHOP03'] [data-action='exchange-open']"
+      },
+      {
+        "action": "expectText",
+        "selector": ".activity-toast",
+        "value": "已售罄"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shop'] [data-item-id='SHOP02'] [data-action='exchange-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='exchangeConfirm'] [data-action='exchange-confirm']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shop'] [data-item-id='SHOP02'] [data-action='exchange-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='exchangeConfirm'] [data-action='exchange-confirm']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='shop'] .shop-balance",
+        "value": "4"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shop'] [data-item-id='SHOP02'] [data-action='exchange-open']"
+      },
+      {
+        "action": "expectText",
+        "selector": ".activity-toast",
+        "value": "积分不足，请继续扭蛋获取"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shop'] [data-action='panel-back']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .progress-heading",
+        "value": "累计积分 49"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='debug-open']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] .debug-section:nth-of-type(5) .debug-log",
+        "value": "节点 PT01"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] .debug-section:nth-of-type(6) .debug-log",
+        "value": "模拟待领奖"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_10",
+    "name": "供券事件去重与已确认抽取刷新恢复",
+    "requirements": [
+      "R10",
+      "R11"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] [data-action='guide-skip']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-order-success']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-replay']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] [data-debug-receipt]",
+        "value": "不重复发券"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "8"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "7"
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "7"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='drawResult'] .result-item",
+        "count": 1
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='drawResult'] .duplicate-points",
+        "value": "重复 +1 积分"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "6"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .progress-heading",
+        "value": "累计积分 1"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_11",
+    "name": "时间未确认只读、到期停供与离开后一次性结算",
+    "requirements": [
+      "R09",
+      "R10"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] [data-action='guide-skip']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='debug-open']"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='timeTrusted']",
+        "value": "false"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-expire']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectDisabled",
+        "selector": "[data-screen='machine'] [data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='debug-open']"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='timeTrusted']",
+        "value": "true"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-apply']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-order-success']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] [data-debug-receipt]",
+        "value": "外部供券已停止"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "3"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "2"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='machine-close']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='ending'] [data-action='ending-confirm']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='ending'] [data-action='ending-confirm']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='entry'] .entry-unavailable",
+        "value": "本期活动已结束"
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='entry'] .entry-unavailable",
+        "value": "本期活动已结束"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='ending']",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "id": "GACHA_12",
+    "name": "到期会话保留商店操作，离开后按序展示结束与品质补发",
+    "requirements": [
+      "R07",
+      "R09",
+      "R10",
+      "R11"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] [data-action='guide-skip']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-order-success']",
+        "count": 8
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='tier-select'][data-tier-id='X10']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shopUnlock'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)",
+        "count": 2
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='collection-open']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='collection'] .collection-total",
+        "value": "25/25"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='collection'] [data-action='claim-node'].can-claim",
+        "count": 5
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='collection'] [data-action='panel-back']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-expire']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='shop-open']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='shop'] .shop-balance",
+        "value": "49"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shop'] [data-action='panel-back']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='machine-close']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='ending']",
+        "value": "25/25"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='ending'] [data-action='ending-confirm']:not(.modal-close)"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='makeup'] [data-action='makeup-claim']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='makeup'] .makeup-item",
+        "count": 5
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='makeup'] [data-action='makeup-claim']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='makeup'] [data-action='makeup-claim']",
+        "value": "完成结算"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='makeup'] [data-action='makeup-claim']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='entry'] .entry-unavailable",
+        "value": "本期活动已结束"
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='makeup']",
+        "count": 0
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='entry'] .entry-unavailable",
+        "value": "本期活动已结束"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_13",
+    "name": "供券拒绝写入本地日志且不改变券余额，重复玩具达成首个阶段节点",
+    "requirements": [
+      "R02",
+      "R04",
+      "R11"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] [data-action='guide-skip']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-order-success']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-replay']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] [data-debug-receipt]",
+        "value": "去重"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] .debug-section:nth-of-type(5) .debug-log",
+        "value": "supply_rejected"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 8"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='drawResult'] .duplicate-points",
+        "value": "重复 +1 积分"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='claim'] .modal-header",
+        "value": "累计1分"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .progress-heading",
+        "value": "累计积分 1"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 6"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_14",
+    "name": "刷新后再次供券和抽取仍使用新的事务ID",
+    "requirements": [
+      "R02",
+      "R03",
+      "R04",
+      "R10",
+      "R11"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] [data-action='guide-skip']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-order-success']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": ".ticket-pill",
+        "value": "扭蛋券 8"
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-order-success']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": ".ticket-pill",
+        "value": "扭蛋券 13"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "expectText",
+        "selector": ".ticket-pill",
+        "value": "扭蛋券 12"
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='drawResult'] .duplicate-points",
+        "value": "重复 +1 积分"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='claim']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] [data-action='popup-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": ".ticket-pill",
+        "value": "扭蛋券 11"
+      },
+      {
+        "action": "expectText",
+        "selector": ".progress-heading",
+        "value": "累计积分 1"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_15",
+    "name": "互斥关系和资源状态分别说明入口不可用原因",
+    "requirements": [
+      "R01",
+      "R08"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='debug-open']"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='mutualExclusionClear']",
+        "value": "false"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-apply']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='entry'] .entry-caption",
+        "value": "存在互斥活动"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='entry'] [data-action='entry-open']",
+        "count": 0
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='entry'] .entry-unavailable",
+        "value": "存在互斥活动"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='debug-open']"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='mutualExclusionClear']",
+        "value": "true"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='resourcesReady']",
+        "value": "false"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-apply']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='entry'] .entry-caption",
+        "value": "活动资源尚未就绪"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='entry'] [data-action='entry-open']",
+        "count": 0
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='debug-open']"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='resourcesReady']",
+        "value": "true"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-apply']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-close']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_16",
+    "name": "兑换确认弹窗不可越过未处理的抽取结果",
+    "requirements": [
+      "R03",
+      "R07",
+      "R10"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] [data-action='guide-skip']:not(.modal-close)"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='drawResult'] .result-item",
+        "count": 1
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 2"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='shop-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shop'] [data-item-id='SHOP01'] [data-action='exchange-open']"
+      },
+      {
+        "action": "expectText",
+        "selector": ".activity-toast",
+        "value": "需要集齐全部收藏解锁兑换商城"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='shop'] .shop-balance",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_17",
+    "name": "资格不足时隐藏活动入口并保留固定 Debug",
+    "requirements": [
+      "R01",
+      "R12"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='debug-open']"
+      },
+      {
+        "action": "fill",
+        "selector": "[data-screen='debug'] [data-debug-field='level']",
+        "value": "6"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-apply']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='entry'] [data-action='entry-open']",
+        "count": 0
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='entry'] .entry-unavailable",
+        "value": "需要达到7级"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='entry'] [data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='debug-open']"
+      },
+      {
+        "action": "fill",
+        "selector": "[data-screen='debug'] [data-debug-field='level']",
+        "value": "7"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-apply']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_18",
+    "name": "结束后结算展示期内只读查看摘要",
+    "requirements": [
+      "R09",
+      "R12"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] .modal-header [data-action='guide-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-expire']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='machine-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='ending'] .modal-actions [data-action='ending-confirm']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='entry'] [data-action='ending-summary-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='ending-summary-open']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='endingSummary'] .modal-content",
+        "value": "收藏完成"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='endingSummary'] .modal-actions [data-action='ending-summary-close']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='entry'] [data-action='entry-open']",
+        "count": 0
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='entry'] [data-action='ending-summary-open']"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_19",
+    "name": "首次进入前供券与初始券累加，刷新及重放均不丢券",
+    "requirements": [
+      "R01",
+      "R02",
+      "R10"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-order-success']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] [data-debug-receipt]",
+        "value": "实际 5 张"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] .modal-header [data-action='guide-skip']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 8"
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 8"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='debug-open']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] .debug-section:has(h3:has-text('本地事件日志')) .debug-log",
+        "value": "supply_granted"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 8"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_20",
+    "name": "关闭首次封面后重进仍触发首次引导且保留初始券",
+    "requirements": [
+      "R01",
+      "R08"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] .modal-header [data-action='cover-close']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='cover']",
+        "count": 0
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='guide'] [data-action='guide-next']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='guide'] .guide-progress",
+        "value": "1 / 5"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] .modal-header [data-action='guide-skip']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 3"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='machine-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='guide']",
+        "count": 0
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 3"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_21",
+    "name": "零发券的已结算生成器事件跨活动日重放仍去重",
+    "requirements": [
+      "R02",
+      "R10",
+      "R11"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] .modal-header [data-action='guide-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-generator-miss']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] [data-debug-receipt]",
+        "value": "实际 0 张"
+      },
+      {
+        "action": "fill",
+        "selector": "[data-screen='debug'] [data-debug-field='serverTime']",
+        "value": "2026-09-30T04:00:00+08:00"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-apply']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-replay']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] [data-debug-receipt]",
+        "value": "不重复发券"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 3"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_22",
+    "name": "模拟存档故障后仍能浏览收藏、Info 与事件账本，抽取保持禁用",
+    "requirements": [
+      "R05",
+      "R06",
+      "R10",
+      "R12"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] .modal-header [data-action='guide-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-storage-fail']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] [data-save-warning]",
+        "value": "活动存档暂不可用"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='debug'] .debug-section:has(h3:has-text('奖励账本'))"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "expectDisabled",
+        "selector": "[data-screen='machine'] [data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='collection-open']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='collection'] .toy-tile.is-locked",
+        "count": 25
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='collection'] .modal-header [data-action='panel-back']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='info-open']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='info'] .share-row .toy-art",
+        "count": 25
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='info'] .modal-header [data-action='panel-back']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 3"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_23",
+    "name": "时间待确认时刷新终止到期会话，确认后先显示结束弹窗",
+    "requirements": [
+      "R09",
+      "R10"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] .modal-header [data-action='guide-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='debug-open']"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='timeTrusted']",
+        "value": "false"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-expire']"
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='machine'] [data-action='draw']",
+        "count": 0
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='debug-open']"
+      },
+      {
+        "action": "select",
+        "selector": "[data-screen='debug'] [data-debug-field='timeTrusted']",
+        "value": "true"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-apply']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='ending'] [data-action='ending-confirm']:not(.modal-close)"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='entry'] [data-action='entry-open']",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "id": "GACHA_24",
+    "name": "抽取结果未收下时不丢失队列，关闭后恢复机台",
+    "requirements": [
+      "R03",
+      "R10"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] .modal-header [data-action='guide-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='drawResult'] .result-item",
+        "count": 1
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 2"
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='drawResult'] .result-item",
+        "count": 1
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 2"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='machine'] [data-action='draw']"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_25",
+    "name": "未集齐全部玩具仍可完成一次性结束结算并保留摘要",
+    "requirements": [
+      "R09",
+      "R11"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] .modal-header [data-action='guide-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-expire']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='machine-close']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='ending'] .modal-content",
+        "value": "1/25"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='ending'] .modal-actions [data-action='ending-confirm']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='ending-summary-open']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='endingSummary'] .modal-content",
+        "value": "收藏完成 1/25"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='endingSummary'] .modal-actions [data-action='ending-summary-close']"
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='ending']",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "id": "GACHA_26",
+    "name": "已确认兑换结果刷新后仍可收下，且不会重复扣分到账",
+    "requirements": [
+      "R07",
+      "R10"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] .modal-header [data-action='guide-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-order-success']",
+        "count": 9
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='tier-select'][data-tier-id='X10']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] .modal-actions [data-action='popup-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] .modal-actions [data-action='popup-close']",
+        "count": 2
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shopUnlock'] .modal-actions [data-action='popup-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] .modal-actions [data-action='popup-close']",
+        "count": 2
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .progress-heading",
+        "value": "累计积分 49"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='shop-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shop'] [data-item-id='SHOP01'] [data-action='exchange-open']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='exchangeConfirm'] [data-action='exchange-confirm']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='exchangeConfirm'] [data-action='exchange-confirm']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='claim'] .modal-content"
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='claim'] .modal-content",
+        "value": "兑换已确认"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='claim'] .modal-actions [data-action='popup-close']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='shop'] .shop-balance",
+        "value": "46"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .progress-heading",
+        "value": "累计积分 49"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='shop'] article[data-item-id='SHOP01']",
+        "value": "不限次数"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_27",
+    "name": "封面、收藏和商店弹层上方可操作 Debug，返回后原页面与队列保留",
+    "requirements": [
+      "R02",
+      "R10",
+      "R12"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-overlay-debug][data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-order-success']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] [data-debug-receipt]",
+        "value": "实际 5 张"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] .modal-header [data-action='guide-skip']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 8"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='collection-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-overlay-debug][data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-generator-hit']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] [data-debug-receipt]",
+        "value": "实际 2 张"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='collection'] .collection-total",
+        "value": "0/25"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='collection'] .modal-header [data-action='panel-back']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='shop-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-overlay-debug][data-action='debug-open']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='debug'] [data-action='debug-order-success']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='shop'] .shop-note",
+        "value": "需要集齐全部收藏解锁兑换商城"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='shop'] .modal-header [data-action='panel-back']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 10"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_28",
+    "name": "抽取结果弹层上方的 Debug 不跳过已确认结果",
+    "requirements": [
+      "R02",
+      "R03",
+      "R10"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] .modal-header [data-action='guide-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='drawResult'] .result-item",
+        "count": 1
+      },
+      {
+        "action": "click",
+        "selector": "[data-overlay-debug][data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-order-success']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] [data-debug-receipt]",
+        "value": "实际 5 张"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='drawResult'] .result-item",
+        "count": 1
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 7"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] [data-action='result-close']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='machine'] [data-action='draw']"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_29",
+    "name": "修复回归：外部供券后仍可在Info查看完整固定序列投放口径",
+    "requirements": [
+      "R02",
+      "R05",
+      "R12"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] .modal-header [data-action='guide-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-order-success']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='debug'] [data-debug-receipt]",
+        "value": "实际 5 张"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 8"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='info-open']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='info'] [data-scroll-region='info']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='info'] .share-row .toy-art",
+        "count": 25
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='info'] .info-intro",
+        "value": "不是下一抽独立概率"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='info'] .share-row:first-child .share-percent",
+        "value": "8.33%"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='info'] .modal-header [data-action='panel-back']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .ticket-pill",
+        "value": "扭蛋券 8"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_30",
+    "name": "结束弹窗期间重登及刷新仍能完成唯一一次结算",
+    "requirements": [
+      "R09",
+      "R10"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] .modal-header [data-action='guide-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-expire']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='machine-close']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='ending'] .modal-actions [data-action='ending-confirm']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-overlay-debug][data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] [data-action='debug-relogin']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='ending'] .modal-actions [data-action='ending-confirm']"
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='ending'] .modal-actions [data-action='ending-confirm']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='ending'] .modal-actions [data-action='ending-confirm']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='entry'] .entry-unavailable",
+        "value": "本期活动已结束"
+      },
+      {
+        "action": "reload",
+        "selector": "body"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='ending']",
+        "count": 0
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='entry'] [data-action='entry-open']",
+        "count": 0
+      }
+    ]
+  },
+  {
+    "id": "GACHA_31",
+    "name": "矮屏入口保留可见机台、活动入口及顶部 Debug 热区",
+    "requirements": [
+      "R01",
+      "R12"
+    ],
+    "steps": [
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='entry'] .entry-machine .machine-art"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='entry'] > [data-action='debug-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] > [data-action='debug-open']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='debug'] [data-action='debug-order-success']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='debug'] .modal-actions [data-action='debug-close']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "expectVisible",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      }
+    ]
+  },
+  {
+    "id": "GACHA_32",
+    "name": "重复玩具积分叠在压暗藏品上，收下后汇入机台上方进度条",
+    "requirements": [
+      "R03",
+      "R04",
+      "R10",
+      "R12"
+    ],
+    "steps": [
+      {
+        "action": "click",
+        "selector": "[data-screen='entry'] [data-action='entry-open']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='cover'] [data-action='cover-start']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='guide'] .modal-header [data-action='guide-skip']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='tier-select'][data-tier-id='X3']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='machine'] [data-action='draw']"
+      },
+      {
+        "action": "click",
+        "selector": "[data-action='feedback-skip']"
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='drawResult'] .result-item",
+        "count": 3
+      },
+      {
+        "action": "expectCount",
+        "selector": "[data-screen='drawResult'] .result-item.is-duplicate",
+        "count": 1
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='drawResult'] .result-item.is-duplicate .result-art .duplicate-points",
+        "value": "+1 积分"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .progress-heading",
+        "value": "累计积分 1"
+      },
+      {
+        "action": "click",
+        "selector": "[data-screen='drawResult'] .modal-actions [data-action='result-close']"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .point-flight-status",
+        "value": "重复积分 +1 已汇入进度条"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='machine'] .available-points",
+        "value": "可用积分 1"
+      },
+      {
+        "action": "expectText",
+        "selector": "[data-screen='claim'] .modal-header",
+        "value": "累计1分"
+      }
+    ]
+  }
+]

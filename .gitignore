@@ -1,0 +1,21 @@
+node_modules/
+dist/
+.env
+.env.local
+*.log
+.DS_Store
+coverage/
+packages/database/prisma/*.db
+packages/database/prisma/*.db-journal
+
+# Local credentials, activity data and generated caches
+.env.*
+!.env.example
+/data/
+/packages/api/data/
+/storage/
+/workspace/
+*.tsbuildinfo
+*.tmp
+*.bak*
+/test-candidate-storage*.json

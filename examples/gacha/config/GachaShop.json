@@ -1,0 +1,65 @@
+{
+  "id": "GachaShop",
+  "name": "全收藏积分商品",
+  "fields": [
+    {
+      "key": "id",
+      "label": "商品ID",
+      "type": "string",
+      "required": true,
+      "description": "兑换次数及事务去重关联"
+    },
+    {
+      "key": "rewardId",
+      "label": "奖励ID",
+      "type": "string",
+      "required": true,
+      "description": "指向RewardCatalog"
+    },
+    {
+      "key": "pointPrice",
+      "label": "单次积分价格",
+      "type": "number",
+      "required": true,
+      "description": "必须大于0"
+    },
+    {
+      "key": "exchangeLimit",
+      "label": "本期兑换上限",
+      "type": "number",
+      "required": true,
+      "description": "-1不限次；不使用0"
+    },
+    {
+      "key": "sortOrder",
+      "label": "显示顺序",
+      "type": "number",
+      "required": true,
+      "description": "升序"
+    }
+  ],
+  "rows": [
+    {
+      "id": "SHOP01",
+      "rewardId": "COIN100",
+      "pointPrice": 3,
+      "exchangeLimit": -1,
+      "sortOrder": 1
+    },
+    {
+      "id": "SHOP02",
+      "rewardId": "ENERGY20",
+      "pointPrice": 10,
+      "exchangeLimit": 3,
+      "sortOrder": 2
+    },
+    {
+      "id": "SHOP03",
+      "rewardId": "BOARD2",
+      "pointPrice": 25,
+      "exchangeLimit": 1,
+      "sortOrder": 3
+    }
+  ],
+  "pacing": {}
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "MC活动策划文档"
+  short_description: "按用户原稿整理多类型活动策划，语言简明，只写已有功能并补齐必要配置说明"
+  default_prompt: "使用 $game-planning-document 按我提供的资料整理活动策划，只写资料已有的功能，需要配置时给出简明表头和详细字段说明。"

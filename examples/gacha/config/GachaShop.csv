@@ -1,0 +1,4 @@
+﻿"id","rewardId","pointPrice","exchangeLimit","sortOrder"
+"SHOP01","COIN100","3","-1","1"
+"SHOP02","ENERGY20","10","3","2"
+"SHOP03","BOARD2","25","1","3"

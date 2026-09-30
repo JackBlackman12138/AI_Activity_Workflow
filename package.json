@@ -1,0 +1,15 @@
+{
+  "name": "ai-activity-studio",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "npm run dev -w @ai-activity-studio/web",
+    "build": "npm run build -w @ai-activity-studio/shared && npm run build -w @ai-activity-studio/database && npm run build -w @ai-activity-studio/api && npm run build -w @ai-activity-studio/worker && npm run build -w @ai-activity-studio/web",
+    "typecheck": "npm run typecheck -w @ai-activity-studio/shared && npm run typecheck -w @ai-activity-studio/database && npm run typecheck -w @ai-activity-studio/api && npm run typecheck -w @ai-activity-studio/worker && npm run typecheck -w @ai-activity-studio/web",
+    "test": "npm run build -w @ai-activity-studio/shared && npm run build -w @ai-activity-studio/api && npm test -w @ai-activity-studio/api",
+    "api": "npm run build -w @ai-activity-studio/shared && npm run build -w @ai-activity-studio/api && npm start -w @ai-activity-studio/api",
+    "start": "npm run preview -w @ai-activity-studio/web"
+  },
+  "engines": { "node": ">=20", "npm": ">=10" }
+}
